@@ -1,0 +1,201 @@
+/* General Reset and Dark Mode Setup */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-bg: #000; /* Pure black background for the top */
+    --secondary-bg: #1A1A1A; /* Slightly lighter for other sections */
+    --text-light: #F0F0F0; /* Light text */
+    --nav-text-color: #888; /* Gray for subtle navigation */
+    --accent-start-gradient: #FF00FF; /* Pink/Magenta */
+    --accent-end-gradient: #FF6600; /* Orange */
+    --font-family: 'Inter', sans-serif; 
+    --max-width-content: 1600px; 
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-light);
+    background-color: var(--primary-bg);
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+}
+
+a {
+    color: var(--text-light); 
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--accent-start-gradient);
+}
+
+/* --- Navigation Bar (Centered) --- */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 5%;
+    background-color: transparent;
+    position: absolute; /* Allows hero content to scroll underneath */
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar nav a {
+    color: var(--nav-text-color);
+    margin: 0 2.5rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    transition: color 0.3s;
+}
+
+.navbar nav a:hover {
+    color: var(--text-light);
+}
+
+/* --- Hero Section (The "Alex" View) --- */
+.hero-section {
+    min-height: 100vh; /* Full screen height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10rem 5% 4rem;
+    background-color: var(--primary-bg);
+    position: relative;
+}
+
+.main-heading {
+    font-size: 8vw; /* Very large, responsive text */
+    font-weight: 900;
+    color: var(--text-light);
+    line-height: 1;
+    margin-bottom: 2rem;
+    max-width: var(--max-width-content);
+    letter-spacing: -2px;
+}
+
+.hero-description {
+    font-size: 1.5rem;
+    color: #ccc;
+    max-width: 600px;
+    margin-bottom: 3rem;
+    line-height: 1.4;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --- Gradient Button (CTA) --- */
+.gradient-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(90deg, var(--accent-start-gradient) 0%, var(--accent-end-gradient) 100%); 
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 30px; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+    margin-bottom: 5rem;
+}
+
+.gradient-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(255, 0, 255, 0.6);
+}
+
+/* --- 3D Character Placeholder --- */
+.character-placeholder {
+    width: 350px; 
+    height: 350px; 
+    background-color: #333; 
+    border-radius: 50%; /* Example shape */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+/* --- General Content Sections --- */
+.content-section {
+    padding: 8rem 5%;
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+    background-color: var(--secondary-bg);
+    min-height: 80vh;
+}
+
+.content-section:nth-child(even) {
+    background-color: #111; /* Alternate color for visual break */
+}
+
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--text-light);
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 3rem 5%;
+    background-color: var(--primary-bg);
+    border-top: 1px solid #333;
+}
+
+footer a {
+    color: var(--accent-start-gradient);
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1200px) {
+    .main-heading {
+        font-size: 10vw; 
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar nav a {
+        margin: 0 1rem;
+        font-size: 0.8rem;
+    }
+    .main-heading {
+        font-size: 14vw; 
+    }
+    .hero-description {
+        font-size: 1.1rem;
+        max-width: 90%;
+    }
+    .character-placeholder {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar nav {
+        flex-wrap: wrap; 
+        justify-content: center;
+    }
+    .navbar nav a {
+        margin: 0.5rem 0.8rem;
+    }
+    .main-heading {
+        font-size: 18vw; 
+    }
+}
