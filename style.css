@@ -1,201 +1,770 @@
-/* General Reset and Dark Mode Setup */
+/* ------------------------------ */
+/* BASIC SETUP */
+/* ------------------------------ */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    --primary-bg: #000; /* Pure black background for the top */
-    --secondary-bg: #1A1A1A; /* Slightly lighter for other sections */
-    --text-light: #F0F0F0; /* Light text */
-    --nav-text-color: #888; /* Gray for subtle navigation */
-    --accent-start-gradient: #FF00FF; /* Pink/Magenta */
-    --accent-end-gradient: #FF6600; /* Orange */
-    --font-family: 'Inter', sans-serif; 
-    --max-width-content: 1600px; 
+  --primary-bg: #000;
+  --secondary-bg: #1a1a1a;
+  --text-light: #f0f0f0;
+  --nav-text: #888;
+  --accent-start: #e02a90;
+  --accent-end: #9048f0;
+  --font: "Inter", sans-serif;
 }
 
 body {
-    font-family: var(--font-family);
-    line-height: 1.6;
-    color: var(--text-light);
-    background-color: var(--primary-bg);
-    scroll-behavior: smooth;
-    text-rendering: optimizeLegibility;
+  font-family: var(--font);
+  color: var(--text-light);
+  background-color: var(--primary-bg);
+  overflow-x: hidden;
+  line-height: 1.6;
+  scroll-behavior: smooth;
 }
 
-a {
-    color: var(--text-light); 
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-a:hover {
-    color: var(--accent-start-gradient);
-}
-
-/* --- Navigation Bar (Centered) --- */
+/* ------------------------------ */
+/* NAVBAR */
+/* ------------------------------ */
 .navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 5%;
-    background-color: transparent;
-    position: absolute; /* Allows hero content to scroll underneath */
-    width: 100%;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  padding: 2rem 0;
+  z-index: 10;
 }
 
 .navbar nav a {
-    color: var(--nav-text-color);
-    margin: 0 2.5rem;
-    font-weight: 700;
-    font-size: 0.9rem;
-    letter-spacing: 1.5px;
-    transition: color 0.3s;
+  margin: 0 2rem;
+  color: var(--nav-text);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 1.5px;
+  transition: color 0.3s;
 }
 
 .navbar nav a:hover {
-    color: var(--text-light);
+  color: var(--text-light);
 }
 
-/* --- Hero Section (The "Alex" View) --- */
+/* ------------------------------ */
+/* HERO SECTION */
+/* ------------------------------ */
 .hero-section {
-    min-height: 100vh; /* Full screen height */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 10rem 5% 4rem;
-    background-color: var(--primary-bg);
-    position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7rem 5% 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 3rem;
+}
+
+.hero-content {
+  max-width: 540px;
 }
 
 .main-heading {
-    font-size: 8vw; /* Very large, responsive text */
-    font-weight: 900;
-    color: var(--text-light);
-    line-height: 1;
-    margin-bottom: 2rem;
-    max-width: var(--max-width-content);
-    letter-spacing: -2px;
+  font-size: clamp(3.5rem, 8vw, 5.5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+  -webkit-background-clip: text;
+  color: transparent;
+  line-height: 0.95;
+  margin-bottom: 2rem;
 }
 
 .hero-description {
-    font-size: 1.5rem;
-    color: #ccc;
-    max-width: 600px;
-    margin-bottom: 3rem;
-    line-height: 1.4;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  color: #ccc;
+  margin-bottom: 2.5rem;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
-/* --- Gradient Button (CTA) --- */
+/* ------------------------------ */
+/* BUTTON */
+/* ------------------------------ */
 .gradient-button {
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    background: linear-gradient(90deg, var(--accent-start-gradient) 0%, var(--accent-end-gradient) 100%); 
-    color: white;
-    font-weight: 700;
-    font-size: 1.1rem;
-    border-radius: 30px; 
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
-    margin-bottom: 5rem;
+  display: inline-block;
+  padding: 1rem 2.7rem;
+  background: linear-gradient(90deg, var(--accent-start) 0%, var(--accent-end) 100%);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 20px rgba(224, 42, 144, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .gradient-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(255, 0, 255, 0.6);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 30px rgba(224, 42, 144, 0.7);
 }
 
-/* --- 3D Character Placeholder --- */
-.character-placeholder {
-    width: 350px; 
-    height: 350px; 
-    background-color: #333; 
-    border-radius: 50%; /* Example shape */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 0.8rem;
-    text-align: center;
+/* ------------------------------ */
+/* IMAGE SIDE */
+/* ------------------------------ */
+.character-container {
+  position: relative;
+  width: 520px;   /* increased from 380px */
+  height: auto;   /* allows natural scaling */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* --- General Content Sections --- */
+.animated-character {
+  width: 700px;   /* match container width */
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  border: none;
+  z-index: 1;
+  position: relative;
+  animation: float 4s ease-in-out infinite;
+}
+
+
+.character-container::before {
+  content: "";
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(224, 42, 144, 0.5) 0%, rgba(0, 0, 0, 0) 70%);
+  filter: blur(30px);
+  z-index: 0;
+}
+
+.animated-character {
+  width: 900px;   /* match container width */
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  border: none;
+  z-index: 1;
+  position: relative;
+  animation: float 4s ease-in-out infinite;
+}
+
+
+
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* ------------------------------ */
+/* PROJECTS, ABOUT, FOOTER */
+/* ------------------------------ */
 .content-section {
-    padding: 8rem 5%;
-    max-width: var(--max-width-content);
-    margin: 0 auto;
-    background-color: var(--secondary-bg);
-    min-height: 80vh;
-}
-
-.content-section:nth-child(even) {
-    background-color: #111; /* Alternate color for visual break */
+  padding: 8rem 5%;
+  text-align: center;
+  background-color: var(--secondary-bg);
 }
 
 h2 {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 3rem;
-    color: var(--text-light);
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
 }
 
-/* --- Footer --- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background: #111;
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid #333;
+  transition: transform 0.3s ease;
+}
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
 footer {
-    text-align: center;
-    padding: 3rem 5%;
-    background-color: var(--primary-bg);
-    border-top: 1px solid #333;
+  text-align: center;
+  padding: 3rem 5%;
+  background-color: var(--primary-bg);
+  border-top: 1px solid #333;
 }
 
 footer a {
-    color: var(--accent-start-gradient);
+  color: var(--accent-start);
 }
 
 
-/* --- Responsive Adjustments --- */
-@media (max-width: 1200px) {
-    .main-heading {
-        font-size: 10vw; 
-    }
+/* ------------------------------ */
+/* RESPONSIVE */
+/* ------------------------------ */
+@media (max-width: 900px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  .character-container {
+    width: 300px;
+    height: 300px;
+  }
 }
 
+/* ✨ Sparkle Trail Effect */
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 9999;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+  animation: sparkleFade 1.2s linear forwards;
+}
+
+@keyframes sparkleFade {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+/* 🎓 Two-Layer Certificates Gallery (Parallax Scroll) */
+.certificates-section {
+  position: relative;
+  width: 100%;
+  height: 220vh;
+; /* extended scroll duration */
+  background-color: #000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 5rem;
+}
+
+.section-title {
+  color: #fff;
+  font-size: 2.3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  background: linear-gradient(90deg, #e02a90, #9048f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+  position: sticky;
+  top: 3rem;
+  z-index: 5;
+}
+
+.scroll-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.scroll-track {
+  display: flex;
+  gap: 2rem;
+  position: absolute;
+  will-change: transform;
+  transition: transform 0.2s ease-out;
+}
+
+.scroll-track img {
+  width: 480px;
+  height: 340px;
+  object-fit: contain;
+  background-color: #111;
+  border-radius: 12px;
+  border: 1.5px solid rgba(224, 42, 144, 0.4);
+  box-shadow: 0 0 25px rgba(144, 72, 240, 0.25);
+  flex-shrink: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.scroll-track img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(224, 42, 144, 0.6);
+}
+
+/* --- Layer positioning (tight gap) --- */
+.layer-top {
+  top: 30%;
+}
+
+.layer-bottom {
+  top: 58%;
+  opacity: 0.9;
+}
+
+/* --- Responsive adjustments --- */
 @media (max-width: 768px) {
-    .navbar nav a {
-        margin: 0 1rem;
-        font-size: 0.8rem;
-    }
-    .main-heading {
-        font-size: 14vw; 
-    }
-    .hero-description {
-        font-size: 1.1rem;
-        max-width: 90%;
-    }
-    .character-placeholder {
-        width: 250px;
-        height: 250px;
-    }
+  .scroll-track img {
+    width: 300px;
+    height: 220px;
+  }
+  .layer-top { top: 25%; }
+  .layer-bottom { top: 55%; }
 }
 
-@media (max-width: 480px) {
-    .navbar nav {
-        flex-wrap: wrap; 
-        justify-content: center;
-    }
-    .navbar nav a {
-        margin: 0.5rem 0.8rem;
-    }
-    .main-heading {
-        font-size: 18vw; 
-    }
+
+/* 🌟 ABOUT ME SECTION (Parallax + Fade) */
+.about-me-section {
+  position: relative;
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 4rem 2rem;
+  perspective: 1000px; /* creates depth for parallax */
+}
+
+.about-content {
+  max-width: 800px;
+  position: relative;
+  z-index: 5;
+  transition: transform 2s ease-in-out, opacity 2s ease-in-out;
+  opacity: 0;
+  transform: translateY(80px);
+}
+
+.about-title {
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: -2px;
+  background: linear-gradient(90deg, #e02a90, #9048f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+  transition: transform 2s ease-in-out, opacity 2s ease-in-out;
+  transform: translateY(60px);
+  opacity: 0;
+}
+
+/* Fix for About Me button */
+.about-btn {
+  display: inline-block;
+  margin-top: 2rem;             /* adds space above */
+  padding: 1rem 3rem;           /* makes the button balanced */
+  background: linear-gradient(90deg, #e02a90 0%, #9048f0 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 20px rgba(224, 42, 144, 0.4);
+  transition: transform 2.5s ease, box-shadow 2.5s ease;
+  position: relative;
+  z-index: 10;                  /* ensures it stays above shapes */
+}
+
+.about-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 35px rgba(224, 42, 144, 0.6);
+}
+
+/* Ensure paragraph above has breathing room */
+.about-text {
+  margin-bottom: 3rem;          /* increases gap before button */
+}
+
+
+/* Decorative shapes (back layers) */
+.about-shape {
+  position: absolute;
+  width: 260px;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: transform 3s ease-in-out, opacity 2s ease-in-out;
+}
+
+.shape-left {
+  left: -300px;
+  top: 25%;
+  z-index: 1;
+}
+
+.shape-right {
+  right: -300px;
+  bottom: 25%;
+  z-index: 1;
+}
+
+/* --- Active (scroll trigger) --- */
+.about-me-section.active .about-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-me-section.active .about-text,
+.about-me-section.active .about-btn {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+
+.about-me-section.active .about-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-me-section.active .shape-left {
+  opacity: 0.6;
+  transform: translateX(250px) translateZ(-100px) scale(1);
+}
+
+.about-me-section.active .shape-right {
+  opacity: 0.6;
+  transform: translateX(-250px) translateZ(-150px) scale(1);
+}
+
+/* --- Fade in while entering --- */
+.about-me-section.active .about-title,
+.about-me-section.active .about-text,
+.about-me-section.active .about-btn,
+.about-me-section.active .about-shape {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 2s ease, transform 2s ease;
+}
+
+/* --- Fade out only when scrolled past --- */
+.about-me-section.fade-out .about-title,
+.about-me-section.fade-out .about-text,
+.about-me-section.fade-out .about-btn,
+.about-me-section.fade-out .about-shape {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: opacity 2.5s ease, transform 2.5s ease;
+}
+
+
+
+
+/* 💼 EXPERIENCE & SKILLS SECTION */
+.experience-section {
+  position: relative;
+  min-height: 120vh;
+  background-color: #fff;
+  color: #000;
+  padding: 8rem 10%;
+  overflow: hidden;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Title --- */
+.exp-title {
+  font-size: 5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+  color: #000;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  letter-spacing: -2px;
+  margin-bottom: 6rem;
+}
+
+/* --- Container --- */
+.exp-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* --- Each Experience Item --- */
+.exp-item {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 2rem;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s ease, transform 1s ease;
+  will-change: opacity, transform;
+}
+
+.exp-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.exp-item h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 1rem;
+}
+
+.exp-item p {
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+/* Fade-out effect when leaving */
+.exp-item.fade-out {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .exp-title {
+    font-size: 3.2rem;
+    margin-bottom: 4rem;
+  }
+
+  .exp-container {
+    gap: 3rem;
+  }
+
+  .exp-item h3 {
+    font-size: 1.6rem;
+  }
+
+  .exp-item p {
+    font-size: 1rem;
+  }
+}
+
+/* 🌈 PROJECTS SECTION — Locked, properly spaced stacking */
+.projects-section {
+  position: relative;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+.projects-wrapper {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.projects-title {
+  position: absolute;
+  top: 6vh; /* Title position near the top of the viewport */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  background: linear-gradient(90deg, #e02a90, #9048f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 20; /* Ensure title is always above the cards */
+  pointer-events: none;
+}
+
+/* Move stacks further down for breathing space. 
+   Set this value (e.g., 30vh) to match the `stackTopOffset` in your JavaScript. */
+.projects-stack {
+  position: absolute;
+  top: 30vh; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, 86vw);
+  height: 70vh;
+  /* Required for the 3D stacking effect in JS */
+  transform-style: preserve-3d;
+}
+
+/* Card design */
+.project-card {
+  position: absolute;
+  width: 100%;
+  background: #111;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.08);
+  padding: 2.5rem;
+  /* Initial hidden state, controlled by JS scroll */
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+  will-change: transform, opacity;
+  /* Required for the 3D stacking effect in JS */
+  backface-visibility: hidden;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.6rem;
+}
+
+.project-number {
+  font-size: 2.2rem;
+  font-weight: 900;
+}
+
+.project-info h3 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.project-info p {
+  margin: 0.25rem 0 0;
+  opacity: 0.8;
+}
+
+.project-btn {
+  padding: 0.55rem 1.4rem;
+  border: 1.5px solid #fff;
+  border-radius: 24px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.project-btn:hover {
+  background: linear-gradient(90deg, #e02a90, #9048f0);
+  border-color: transparent;
+  box-shadow: 0 0 25px rgba(224, 42, 144, 0.3);
+}
+
+.project-images {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+}
+
+.project-images img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+.project-images img:first-child {
+  grid-row: span 2;
+  height: 500px;
+}
+
+
+/* 🌈 MY GRAPHIC DESIGNS — Opposite Parallax Gallery */
+.graphics-section {
+  position: relative;
+  width: 100%;
+  height: 150vh;           /* Reduced height (was too tall) */
+  background: #000;
+  overflow: hidden;
+  padding-bottom: 6rem;       /* Reduced spacing */
+}
+
+/* Title */
+.graphics-title {
+  position: sticky;
+  top: 5rem;
+  z-index: 10;
+  text-align: center;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  background: linear-gradient(90deg, #e02a90, #9048f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -2px;
+  pointer-events: none;
+  margin-bottom: 3rem;   /* was 6rem — now tighter but still spaced */
+}
+
+
+/* TRACK WRAPPER */
+.graphics-scroll-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* TRACKS (left & right directions) */
+.graphics-track {
+  position: absolute;
+  display: flex;
+  gap: 2rem;
+  will-change: transform;
+  transition: transform 0.25s ease-out;
+}
+
+.graphics-top {
+  top: 38vh;   /* was 30vh — moves first row slightly down */
+  left: 0;
+}
+
+.graphics-bottom {
+  top: 68vh;   /* was 60vh — keeps equal spacing */
+  left: 0;
+  opacity: 0.92;
+}
+
+/* IMAGES */
+.graphics-track img {
+  width: 380px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1.5px solid rgba(224, 42, 144, 0.4);
+  box-shadow: 0 0 25px rgba(144, 72, 240, 0.25);
+  flex-shrink: 0;
+  background: #111;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.graphics-section {
+  padding-top: 6rem;   /* was 10rem — now tighter and cleaner */
+  padding-bottom: 8rem;
+  background: #000;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+
+.graphics-track img:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 35px rgba(224, 42, 144, 0.6);
+}
+
+/* MOBILE ADJUSTMENTS */
+@media (max-width: 768px) {
+  .graphics-track img {
+    width: 260px;
+    height: 200px;
+  }
+
+  .graphics-top { top: 18%; }
+  .graphics-bottom { top: 45%; }
 }
