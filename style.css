@@ -249,8 +249,7 @@ footer a {
 .certificates-section {
   position: relative;
   width: 100%;
-  height: 220vh;
-; /* extended scroll duration */
+  height: 150vh; /* FINAL: Reduced height to decrease gap before About Me */
   background-color: #000;
   overflow: hidden;
   display: flex;
@@ -262,7 +261,8 @@ footer a {
 
 .section-title {
   color: #fff;
-  font-size: 2.3rem;
+  /* FINAL: Increased font size */
+  font-size: clamp(3rem, 5vw, 3.5rem); 
   font-weight: 900;
   text-transform: uppercase;
   margin-bottom: 3rem;
@@ -284,7 +284,8 @@ footer a {
 
 .scroll-track {
   display: flex;
-  gap: 2rem;
+  /* REMOVED GAP: Relying on margin-right on img for better control */
+  gap: 0; 
   position: absolute;
   will-change: transform;
   transition: transform 0.2s ease-out;
@@ -300,6 +301,9 @@ footer a {
   box-shadow: 0 0 25px rgba(144, 72, 240, 0.25);
   flex-shrink: 0;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  /* FINAL: Set margin-right to 1rem for moderate horizontal spacing */
+  margin-right: 1rem; 
 }
 
 .scroll-track img:hover {
@@ -309,11 +313,13 @@ footer a {
 
 /* --- Layer positioning (tight gap) --- */
 .layer-top {
-  top: 30%;
+  /* FINAL: Reduced vertical space to title */
+  top: 15%;
 }
 
 .layer-bottom {
-  top: 58%;
+  /* FINAL: Increased vertical space to fix overlap (from 43% to 50%) */
+  top: 50%; 
   opacity: 0.9;
 }
 
@@ -322,11 +328,11 @@ footer a {
   .scroll-track img {
     width: 300px;
     height: 220px;
+    margin-right: 1rem; /* Ensure margin applies on mobile too */
   }
-  .layer-top { top: 25%; }
-  .layer-bottom { top: 55%; }
+  .layer-top { top: 12%; }
+  .layer-bottom { top: 45%; }
 }
-
 
 /* 🌟 ABOUT ME SECTION (Parallax + Fade) */
 .about-me-section {
@@ -339,9 +345,12 @@ footer a {
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  padding: 4rem 2rem;
-  perspective: 1000px; /* creates depth for parallax */
+  /* FINAL: Ensure minimal padding is needed to align section */
+  padding: 2rem 2rem; 
+  perspective: 1000px;
 }
+/* ... rest of the About Me styles remain the same ... */
+
 
 .about-content {
   max-width: 800px;
@@ -679,10 +688,12 @@ footer a {
 .graphics-section {
   position: relative;
   width: 100%;
-  height: 150vh;           /* Reduced height (was too tall) */
+  height: 220vh;        /* FULL HEIGHT – prevents overlap */
   background: #000;
   overflow: hidden;
-  padding-bottom: 6rem;       /* Reduced spacing */
+
+  padding-top: 6rem;    /* spacing above the tracks */
+  padding-bottom: 8rem; /* spacing below the tracks */
 }
 
 /* Title */
@@ -698,9 +709,8 @@ footer a {
   -webkit-text-fill-color: transparent;
   letter-spacing: -2px;
   pointer-events: none;
-  margin-bottom: 3rem;   /* was 6rem — now tighter but still spaced */
+  margin-bottom: 3rem;
 }
-
 
 /* TRACK WRAPPER */
 .graphics-scroll-wrapper {
@@ -710,22 +720,24 @@ footer a {
   overflow: hidden;
 }
 
-/* TRACKS (left & right directions) */
+/* TRACKS (left + right) */
 .graphics-track {
   position: absolute;
   display: flex;
-  gap: 2rem;
+  gap: 0.1rem;
   will-change: transform;
   transition: transform 0.25s ease-out;
 }
 
+/* FIRST ROW — higher */
 .graphics-top {
-  top: 38vh;   /* was 30vh — moves first row slightly down */
+  top: 30%;      /* REVISED: Matches .layer-top */
   left: 0;
 }
 
+/* SECOND ROW — lower */
 .graphics-bottom {
-  top: 68vh;   /* was 60vh — keeps equal spacing */
+  top: 55%;      /* REVISED: Matches .layer-bottom */
   left: 0;
   opacity: 0.92;
 }
@@ -743,28 +755,18 @@ footer a {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.graphics-section {
-  padding-top: 6rem;   /* was 10rem — now tighter and cleaner */
-  padding-bottom: 8rem;
-  background: #000;
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-
 .graphics-track img:hover {
   transform: scale(1.06);
   box-shadow: 0 0 35px rgba(224, 42, 144, 0.6);
 }
 
-/* MOBILE ADJUSTMENTS */
+/* MOBILE */
 @media (max-width: 768px) {
   .graphics-track img {
     width: 260px;
     height: 200px;
   }
 
-  .graphics-top { top: 18%; }
-  .graphics-bottom { top: 45%; }
+  .graphics-top { top: 25%; } /* REVISED: Matches mobile .layer-top */
+  .graphics-bottom { top: 55%; } /* REVISED: Matches mobile .layer-bottom */
 }
