@@ -118,7 +118,7 @@ body {
 /* ------------------------------ */
 .character-container {
   position: relative;
-  width: 520px;   /* increased from 380px */
+  width: 1000px;   /* increased from 380px */
   height: auto;   /* allows natural scaling */
   display: flex;
   align-items: center;
@@ -342,7 +342,6 @@ footer a {
 }
 
 
-
 /* 🌟 ABOUT ME SECTION (Parallax + Fade) */
 .about-me-section {
   position: relative;
@@ -353,18 +352,21 @@ footer a {
   align-items: center;
   justify-content: center;
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
   padding: 2rem 2rem;
-  perspective: 1000px; /* creates depth for parallax */
+  perspective: 1000px;
 }
 
-.about-content {
-  max-width: 800px;
-  position: relative;
-  z-index: 5;
-  transition: transform 2s ease-in-out, opacity 2s ease-in-out;
+/* Title & Content */
+.about-content,
+.about-title,
+.about-text,
+.about-btn {
   opacity: 0;
-  transform: translateY(80px);
+  transform: translateY(60px);
+  transition:
+    opacity 1.4s ease-out,
+    transform 1.45s cubic-bezier(0.22,1,0.36,1);
 }
 
 .about-title {
@@ -375,18 +377,20 @@ footer a {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 2rem;
-  transition: transform 2s ease-in-out, opacity 2s ease-in-out;
-  transform: translateY(60px);
-  opacity: 0;
 }
 
-/* Fix for About Me button */
+/* Paragraphs */
+.about-text {
+  margin-bottom: 3rem;
+}
+
+/* Button */
 .about-btn {
   display: inline-block;
-  margin-top: 2rem;             /* adds space above */
-  margin-bottom: 5rem; /* Added margin below the button */
-  padding: 1rem 3rem;           /* makes the button balanced */
-  background: linear-gradient(90deg, #e02a90 0%, #9048f0 100%);
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  padding: 1rem 3rem;
+  background: linear-gradient(90deg, #e02a90, #9048f0);
   color: #fff;
   font-weight: 700;
   font-size: 1.1rem;
@@ -394,9 +398,10 @@ footer a {
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 0 0 20px rgba(224, 42, 144, 0.4);
-  transition: transform 2.5s ease, box-shadow 2.5s ease;
-  position: relative;
-  z-index: 10;                  /* ensures it stays above shapes */
+  transition: 
+    opacity 1.45s ease-out,
+    transform 1.45s cubic-bezier(0.22,1,0.36,1),
+    box-shadow 0.4s ease;
 }
 
 .about-btn:hover {
@@ -404,79 +409,265 @@ footer a {
   box-shadow: 0 0 35px rgba(224, 42, 144, 0.6);
 }
 
-/* Ensure paragraph above has breathing room */
-.about-text {
-  margin-bottom: 3rem;          /* increases gap before button */
-}
-
-
-/* Decorative shapes (back layers) */
+/* SHAPES */
 .about-shape {
   position: absolute;
   width: 260px;
   opacity: 0;
   transform: scale(0.9);
-  transition: transform 3s ease-in-out, opacity 2s ease-in-out;
+  transition: opacity 1.4s ease, transform 1.45s cubic-bezier(0.22,1,0.36,1);
 }
 
 .shape-left {
   left: -300px;
   top: 25%;
-  z-index: 1;
 }
 
 .shape-right {
   right: -300px;
   bottom: 25%;
-  z-index: 1;
 }
 
-/* --- Active (scroll trigger) --- */
-.about-me-section.active .about-title {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* ------------------------------------------- */
+/* 👇 SCROLL-ACTIVE BEHAVIORS (smooth + slow)  */
+/* ------------------------------------------- */
 
+.about-me-section.active .about-title,
 .about-me-section.active .about-text,
-.about-me-section.active .about-btn {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.3s;
-}
-
+.about-me-section.active .about-btn,
 .about-me-section.active .about-content {
   opacity: 1;
   transform: translateY(0);
 }
 
-.about-me-section.active .shape-left {
-  opacity: 0.6;
-  transform: translateX(250px) translateZ(-100px) scale(1);
-}
-
-.about-me-section.active .shape-right {
-  opacity: 0.6;
-  transform: translateX(-250px) translateZ(-150px) scale(1);
-}
-
-/* --- Fade in while entering --- */
-.about-me-section.active .about-title,
-.about-me-section.active .about-text,
-.about-me-section.active .about-btn,
-.about-me-section.active .about-shape {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 2s ease, transform 2s ease;
-}
-
-/* --- Fade out only when scrolled past --- */
+/* Fade OUT when section passed */
 .about-me-section.fade-out .about-title,
 .about-me-section.fade-out .about-text,
 .about-me-section.fade-out .about-btn,
-.about-me-section.fade-out .about-shape {
+.about-me-section.fade-out .about-content {
   opacity: 0;
   transform: translateY(80px);
-  transition: opacity 2.5s ease, transform 2.5s ease;
+}
+
+/* Layout Columns */
+.about-wrapper {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* LEFT + RIGHT ANIMATION */
+.about-left,
+.about-right {
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(40px);
+  transition:
+    opacity 1.45s ease-out,
+    transform 1.55s cubic-bezier(0.22,1,0.36,1),
+    filter 1.4s ease;
+}
+
+/* starting positions */
+.about-left {
+  transform: translateX(-160px) translateY(40px);
+}
+
+.about-right {
+  transform: translateX(160px) translateY(40px);
+}
+
+/* SLIDE-IN */
+.about-left.active,
+.about-right.active {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0) translateY(0);
+}
+
+/* SLIDE-OUT */
+.about-left.exit {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateX(-220px) translateY(50px);
+}
+
+.about-right.exit {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateX(220px) translateY(50px);
+}
+
+/* Card & paragraph styling (unchanged) */
+.about-left {
+  text-align: left;
+  padding-right: 2rem;
+}
+
+.about-left p {
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  max-width: 90%;
+}
+
+/* RIGHT CARD (restored original design) */
+.beautiful-card {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 
+    0 0 25px rgba(144, 72, 240, 0.25),
+    0 0 45px rgba(224, 42, 144, 0.15);
+  transition: 1s ease;
+}
+
+.beautiful-card:hover {
+  box-shadow: 
+    0 0 35px rgba(224, 42, 144, 0.35),
+    0 0 55px rgba(144, 72, 240, 0.4);
+  transform: translateY(-4px);
+}
+
+/* Title */
+.info-title {
+  margin-bottom: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+/* List text inside card */
+.about-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about-details li {
+  margin-bottom: 1.1rem;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.about-details strong {
+  color: #e02a90;
+  font-weight: 700;
+}
+
+
+/* MOBILE */
+@media(max-width: 900px){
+  .about-wrapper { grid-template-columns: 1fr; }
+  .about-left { padding-right: 0; }
+  .about-right { margin-top: 1rem; }
+}
+
+/* ICON POSITIONS & SCATTER (your exact original) */
+.about-icons {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.about-icon {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(80px) scale(0.9);
+  filter: blur(10px);
+  transition:
+    opacity 1.3s cubic-bezier(0.22,1,0.36,1),
+    transform 1.45s cubic-bezier(0.22,1,0.36,1),
+    filter 2s ease;
+}
+
+/* arrow */
+.icon-arrow {
+  width: 280px;
+  top: -80px;
+  left: -40px;
+  transform: translateX(-180px) translateY(40px) scale(0.85);
+  transition-delay: 1.4s;
+}
+/* ps */
+.icon-ps {
+  width: 250px;
+  top: -80px;
+  right: -10px;
+  transform: translateX(120px) translateY(40px) scale(0.85);
+  transition-delay: 1.6s;
+}
+/* folder */
+.icon-folder {
+  width: 500px;
+  bottom: -270px;
+  left: -260px;
+  transform: translateX(-140px) translateY(60px) scale(0.9);
+  transition-delay: 1.8s;
+}
+/* keys */
+.icon-keys {
+  width: 400px;
+  bottom: -50px;
+  left: 450px;
+  transform: translateY(120px) scale(0.85);
+  transition-delay: 2s;
+}
+/* ring */
+.icon-ring {
+  width: 550px;
+  bottom: -350px;
+  right: -100px;
+  transform: rotateZ(-32deg) rotateX(8deg) translateX(120px) translateY(40px) scale(0.85);
+  transition-delay: 2.2s;
+}
+
+/* icons slide-in */
+.about-icons.active .about-icon {
+  opacity: 1;
+  filter: blur(0);
+  transform: rotateZ(-32deg) rotateX(8deg) translateX(0) translateY(0) scale(1);
+}
+
+/* icons scatter-out */
+.about-icons.exit .about-icon {
+  opacity: 0;
+  filter: blur(12px);
+  transform:
+    translate(calc(var(--scatter-x) * 1px), calc(var(--scatter-y) * 1px))
+    scale(0.65)
+    rotateZ(var(--scatter-rot));
+}
+
+.icon-arrow  { --scatter-x:-220; --scatter-y:-180; --scatter-rot:-40deg; }
+.icon-folder { --scatter-x:-260; --scatter-y:200;  --scatter-rot:-25deg; }
+.icon-keys   { --scatter-x:120;  --scatter-y:240;  --scatter-rot:20deg; }
+.icon-ring   { --scatter-x:260;  --scatter-y:150;  --scatter-rot:45deg; }
+.icon-ps     { --scatter-x:200;  --scatter-y:-220; --scatter-rot:30deg; }
+
+
+
+/* Smooth reactive hover movement */
+.about-icon {
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.3s ease,
+    opacity 0.4s ease;
+  transform-origin: center;
+}
+
+.about-icon:hover {
+  transform: scale(1.06) translateY(-6px) rotateZ(2deg);
+  filter: drop-shadow(0 4px 12px rgba(255,255,255,0.25));
 }
 
 
@@ -554,6 +745,122 @@ footer a {
   transition: opacity 1s ease, transform 1s ease;
 }
 
+/* ————————————————————————
+   EXPERIENCE TIMELINE
+   ———————————————————————— */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+
+.timeline-item {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateY(50px);
+  filter: blur(10px);
+  transition:
+    opacity 1.2s ease-out var(--delay),
+    transform 1.2s cubic-bezier(0.22,1,0.36,1) var(--delay),
+    filter 1.2s ease-out var(--delay);
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+
+/* ICON */
+.timeline-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.6rem;
+  box-shadow: 0 0 20px rgba(144,72,240,0.2);
+}
+
+.timeline-icon {
+  position: relative;
+  z-index: 5; /* stays ABOVE the line */
+}
+
+
+.timeline-line {
+  position: absolute;
+  left: 50%;                /* center the line */
+  transform: translateX(-50%); /* perfectly center it */
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: rgba(224, 42, 144, 0.35);
+  border-radius: 10px;
+  z-index: 1;               /* stays behind icons */
+}
+
+
+.timeline-icon img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+/* CONTENT */
+.timeline-content {
+  max-width: 650px;
+}
+
+.timeline-content h3 {
+  font-size: 1.7rem;
+  margin-bottom: 0.3rem;
+  font-weight: 800;
+}
+
+.exp-date {
+  font-size: 1rem;
+  color: #e02a90;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.timeline-content p {
+  margin-top: 0.7rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #000000;
+}
+
+.exp-dir strong {
+  color: #ff8bd8;
+}
+
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 20px;
+  }
+
+  .timeline-item {
+    flex-direction: column;
+    margin-left: 1.5rem;
+  }
+
+  .timeline-icon {
+    margin-left: 0;
+  }
+}
+
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
   .exp-title {
@@ -573,6 +880,107 @@ footer a {
     font-size: 1rem;
   }
 }
+
+/* 🌈 SKILLS — Premium Card Layout */
+.skills-section {
+  background: #fff;
+  color: #000;
+  padding: 8rem 10%;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.08);
+}
+
+.skills-title {
+  font-size: 4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2rem !important;
+  background: linear-gradient(90deg, #e02a90, #9048f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* FORCE 2x2 GRID ALWAYS */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);   /* always 2 columns */
+  gap: 2.5rem;
+  max-width: 900px;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* CARDS */
+.skill-card {
+  background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+  color: #fff;
+  padding: 2.8rem 2.4rem;
+  border-radius: 22px;
+  border: none;
+  box-shadow:
+    0 12px 35px rgba(224, 42, 144, 0.25),
+    0 8px 18px rgba(0, 0, 0, 0.25);
+  transition: all 0.35s ease;
+
+  /* Clean rectangular shape */
+  height: 220px;      
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+/* Hover animation */
+.skill-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 18px 45px rgba(224, 42, 144, 0.35),
+    0 12px 28px rgba(0,0,0,0.35);
+}
+
+/* ICON FIX (bigger + spaced nicely) */
+.skill-icon {
+  font-size: 3rem;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.skill-card h3 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+
+.skill-card p {
+  font-size: 1.1rem;
+  opacity: 0.95;
+  line-height: 1.55;
+}
+
+
+
+.skill-card {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.skill-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* MOBILE → Stack to 1 column */
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 
 /* 🌈 PROJECTS SECTION — Locked, properly spaced stacking */
 .projects-section {
