@@ -297,39 +297,75 @@
 </article>
 
 
+<article class="project-card project-horizontal">
+
+  <div class="project-left">
+    <div class="project-number">02</div>
+
+    <div class="project-image-wrapper">
+      <img src="ifo-main.png" alt="IFO Automated Trip Ticket System Screenshot">
+    </div>
+  </div>
+
+  <div class="project-right">
+
+    <h3 class="proj-title-small">COURSE PROJECT</h3>
+
+    <h2 class="proj-title-main gradient-text">IFO – Automated Trip Ticket</h2>
+
+    <p class="proj-short-desc">
+      A web-based automation system developed for Mapúa MCM’s Institutional Facilities Office (IFO) to replace their manual trip ticket process. 
+      It streamlines vehicle requests, approvals, and record-keeping to improve efficiency and reduce paperwork.
+    </p>
+
+    <div class="proj-tools">
+      <strong>Tools Used:</strong> HTML, CSS, JavaScript, Python (Flask), MySQL
+    </div>
+
+  </div>
+
+</article>
 
 
-      <article class="project-card">
-        <header class="project-header">
-          <div class="project-number">02</div>
-          <div class="project-info">
-            <h3>CLIENT</h3>
-            <p>Pixel Forge</p>
-          </div>
-          <a class="project-btn" href="#">LIVE PROJECT</a>
-        </header>
-        <div class="project-images">
-          <img src="p2-main.jpg" alt="Project 2 main">
-          <img src="p2-sub1.jpg" alt="Project 2 sub">
-          <img src="p2-sub2.jpg" alt="Project 2 sub">
-        </div>
-      </article>
+<article class="project-card project-horizontal">
 
-      <article class="project-card">
-        <header class="project-header">
-          <div class="project-number">03</div>
-          <div class="project-info">
-            <h3>CLIENT</h3>
-            <p>Design Haven</p>
-          </div>
-          <a class="project-btn" href="#">LIVE PROJECT</a>
-        </header>
-        <div class="project-images">
-          <img src="p3-main.jpg" alt="Project 3 main">
-          <img src="p3-sub1.jpg" alt="Project 3 sub">
-          <img src="p3-sub2.jpg" alt="Project 3 sub">
-        </div>
-      </article>
+  <div class="project-left">
+    <div class="project-number">03</div>
+
+    <div class="project-image-wrapper">
+      <img src="solar-project.png" alt="Hybrid ANN–LSTM Solar Forecasting Dashboard">
+    </div>
+  </div>
+
+  <div class="project-right">
+
+    <h3 class="proj-title-small">RESEARCH PROJECT</h3>
+
+    <h2 class="proj-title-main gradient-text">
+      Hybrid ANN–LSTM Solar Forecasting System
+    </h2>
+
+    <p class="proj-short-desc">
+      A hybrid deep-learning model combining ANN, BiLSTM, and Attention 
+      mechanisms to forecast daily solar energy output using NASA POWER 
+      meteorological datasets.  
+      <br><br>
+      This research was <strong>accepted for presentation at an International 
+      Conference on Software and Computing Technologies</strong> and 
+      <strong>approved for publication in the Journal of Advances in 
+      Information Technology (JAIT)</strong> — a major recognition for 
+      undergraduate research.
+    </p>
+
+    <div class="proj-tools">
+      <strong>Tools Used:</strong> Python, TensorFlow, Keras, BiLSTM, ANN, 
+      Attention Mechanism, NASA POWER Data, Jupyter/Colab, Data Visualization Dashboard
+    </div>
+
+  </div>
+
+</article>
+
     </div>
   </div>
 </section>
@@ -523,7 +559,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const wrapper = section.querySelector(".projects-wrapper");
   const cards = [...wrapper.querySelectorAll(".project-card")];
   
-  const numCards = cards.length; 
+  const numCards = cards.length;
+
+// Extra height for horizontal cards
+section.style.height = `${(numCards * 1.7 + 2) * 100}vh`;
+
 
   const slideGap = 120;   // Vertical distance used when sliding
   const restingGap = -90;  // <-- Height of the project header (approx. 90px)
@@ -625,7 +665,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const wrapper = section.querySelector(".projects-wrapper");
   const cards = [...wrapper.querySelectorAll(".project-card")];
   
-  const numCards = cards.length; 
+  const numCards = cards.length;
+
+// Extra height for horizontal cards
+section.style.height = `${(numCards * 1.7 + 2) * 100}vh`;
+
 
   const slideGap = 120;   
   const restingGap = -90;  // <-- FIX 1: Must be positive 90 for stability
