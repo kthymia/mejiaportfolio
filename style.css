@@ -245,36 +245,29 @@ footer a {
   }
 }
 
-/* 🎓 Two-Layer Certificates Gallery (Parallax Scroll) */
+/* 🎓 CERTIFICATES SECTION – 2 LAYERS, ORIGINAL SIZE */
 .certificates-section {
   position: relative;
-  width: 100%;
-  height: 150vh; /* FINAL: Reduced height to decrease gap before About Me */
-  background-color: #000;
+  height: 200vh;            /* room for 2 big rows + title */
+  background: #000;
   overflow: hidden;
+  padding-top: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding-top: 5rem;
 }
 
 .section-title {
-  color: #fff;
-  /* FINAL: Increased font size */
-  font-size: clamp(3rem, 5vw, 3.5rem); 
+  font-size: clamp(3rem, 5vw, 3.5rem);
   font-weight: 900;
   text-transform: uppercase;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   background: linear-gradient(90deg, #e02a90, #9048f0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 1px;
-  position: sticky;
-  top: 3rem;
-  z-index: 5;
 }
 
+/* wrapper */
 .scroll-wrapper {
   position: relative;
   width: 100%;
@@ -282,57 +275,73 @@ footer a {
   overflow: hidden;
 }
 
+/* tracks */
 .scroll-track {
-  display: flex;
-  /* REMOVED GAP: Relying on margin-right on img for better control */
-  gap: 0; 
   position: absolute;
-  will-change: transform;
-  transition: transform 0.2s ease-out;
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  white-space: nowrap;
 }
 
+/* TOP ROW – moves left */
+.layer-top {
+  top: 22vh;                         /* vertical position of row 1 */
+  animation: scroll-left 45s linear infinite;
+}
+
+/* BOTTOM ROW – moves right */
+.layer-bottom {
+  top: 85vh;                         /* vertical position of row 2 */
+  animation: scroll-right 50s linear infinite;
+  opacity: 0.95;
+}
+
+/* CERT IMAGE SIZE – back to big/original */
 .scroll-track img {
-  width: 480px;
-  height: 340px;
+  width: 520px;
+  height: auto;
   object-fit: contain;
-  background-color: #111;
   border-radius: 12px;
-  border: 1.5px solid rgba(224, 42, 144, 0.4);
-  box-shadow: 0 0 25px rgba(144, 72, 240, 0.25);
-  flex-shrink: 0;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-  /* FINAL: Set margin-right to 1rem for moderate horizontal spacing */
-  margin-right: 1rem; 
+  transition: transform 0.25s ease, box-shadow 0.35s ease;
+  box-shadow: 0 0 0px rgba(224, 42, 144, 0); /* default none */
 }
 
 .scroll-track img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 35px rgba(224, 42, 144, 0.6);
+  transform: scale(1.03);
+  box-shadow:
+      0 0 25px rgba(224, 42, 144, 0.7),
+      0 0 45px rgba(144, 72, 240, 0.5),
+      0 0 70px rgba(255, 255, 255, 0.4);
+  z-index: 20;
 }
 
-/* --- Layer positioning (tight gap) --- */
-.layer-top {
-  /* FINAL: Reduced vertical space to title */
-  top: 15%;
+/* INFINITE LOOP ANIMATIONS
+   (works because each track contains two identical sets) */
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* shift by one full set */
 }
 
-.layer-bottom {
-  /* FINAL: Increased vertical space to fix overlap (from 43% to 50%) */
-  top: 50%; 
-  opacity: 0.9;
+@keyframes scroll-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
 }
 
-/* --- Responsive adjustments --- */
+/* optional tweak for smaller screens */
 @media (max-width: 768px) {
-  .scroll-track img {
-    width: 300px;
-    height: 220px;
-    margin-right: 1rem; /* Ensure margin applies on mobile too */
+  .certificates-section {
+    height: 110vh;
   }
-  .layer-top { top: 12%; }
-  .layer-bottom { top: 45%; }
+  .scroll-track img {
+    width: 360px;
+    height: 260px;
+  }
+  .layer-top { top: 18vh; }
+  .layer-bottom { top: 60vh; }
 }
+
+
 
 /* 🌟 ABOUT ME SECTION (Parallax + Fade) */
 .about-me-section {
@@ -345,12 +354,9 @@ footer a {
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  /* FINAL: Ensure minimal padding is needed to align section */
-  padding: 2rem 2rem; 
-  perspective: 1000px;
+  padding: 2rem 2rem;
+  perspective: 1000px; /* creates depth for parallax */
 }
-/* ... rest of the About Me styles remain the same ... */
-
 
 .about-content {
   max-width: 800px;
@@ -378,6 +384,7 @@ footer a {
 .about-btn {
   display: inline-block;
   margin-top: 2rem;             /* adds space above */
+  margin-bottom: 5rem; /* Added margin below the button */
   padding: 1rem 3rem;           /* makes the button balanced */
   background: linear-gradient(90deg, #e02a90 0%, #9048f0 100%);
   color: #fff;
@@ -622,8 +629,6 @@ footer a {
   transform: translateY(120%);
   opacity: 0;
   transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-  will-change: transform, opacity;
-  /* Required for the 3D stacking effect in JS */
   backface-visibility: hidden;
 }
 
@@ -731,13 +736,13 @@ footer a {
 
 /* FIRST ROW — higher */
 .graphics-top {
-  top: 30%;      /* REVISED: Matches .layer-top */
+  top: 18vh; 
   left: 0;
 }
 
 /* SECOND ROW — lower */
 .graphics-bottom {
-  top: 55%;      /* REVISED: Matches .layer-bottom */
+  top: 48vh; 
   left: 0;
   opacity: 0.92;
 }
@@ -767,6 +772,159 @@ footer a {
     height: 200px;
   }
 
-  .graphics-top { top: 25%; } /* REVISED: Matches mobile .layer-top */
-  .graphics-bottom { top: 55%; } /* REVISED: Matches mobile .layer-bottom */
+  .graphics-top { top: 15vh; } 
+  .graphics-bottom { top: 45vh; } 
+}
+
+/* 📞 CONTACT SECTION */
+.contact-section {
+  background-color: #fff; 
+  color: #000;
+  padding: 8rem 5%;
+  min-height: 80vh; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Initial hidden state for animation */
+  opacity: 0;
+  transform: translateY(80px);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+.contact-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-container {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 5rem;
+  max-width: 1200px;
+  width: 100%;
+  align-items: flex-start; 
+}
+
+.contact-left {
+  flex: 1; 
+  min-width: 300px; 
+  text-align: left;
+}
+
+.contact-title {
+  font-size: clamp(3rem, 5vw, 4.5rem); 
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: #000; 
+  text-transform: uppercase;
+}
+
+.contact-email {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.contact-email:hover {
+  color: var(--accent-start); 
+}
+
+/* Form Side */
+.contact-right {
+  flex: 1;
+  min-width: 300px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 500px; 
+  margin-left: auto; 
+  transition: opacity 0.5s ease-out;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 1rem;
+  color: #000;
+  background-color: #f9f9f9;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #888;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent-end);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(144, 72, 240, 0.2);
+}
+
+.contact-form textarea {
+  min-height: 120px; 
+  resize: vertical;
+}
+
+.send-button {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(90deg, #e02a90 0%, #9048f0 100%);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  align-self: flex-start; 
+  min-width: 150px;
+}
+
+.send-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(224, 42, 144, 0.4);
+}
+
+.success-message {
+  color: var(--accent-start); 
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid var(--accent-end);
+  border-radius: 8px;
+}
+
+/* Responsive adjustments for Contact Section */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .contact-left {
+    text-align: center;
+  }
+
+  .contact-form {
+    margin: 0 auto; 
+  }
+
+  .send-button {
+    align-self: center; 
+  }
 }
