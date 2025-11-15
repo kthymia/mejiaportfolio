@@ -658,87 +658,78 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
-
 <script>
 (() => {
   const section = document.querySelector(".projects-section");
-  const wrapper = section.querySelector(".projects-wrapper");
-  const cards = [...wrapper.querySelectorAll(".project-card")];
-  
-  const numCards = cards.length;
+  const wrapper = document.querySelector(".projects-wrapper");
+  const cards   = [...document.querySelectorAll(".project-card")];
 
-// Extra height for horizontal cards
-section.style.height = `${(numCards * 1.7 + 2) * 100}vh`;
+  if (!section || cards.length === 0) return;
 
+  const num = cards.length;
+  const cardHeightVH = 1;      // 1 scroll unit per card
+  const holdHeight   = 1;      // extra hold at end
+  const totalUnits   = num + holdHeight;
 
-  const slideGap = 120;   
-  const restingGap = -90;  // <-- FIX 1: Must be positive 90 for stability
-  const xOffset = 0;      
-  
-  const pinDuration = 2; // Time to keep the stack fixed (2 extra viewport heights)
-  const totalScroll = numCards + pinDuration; // 3 cards + 2 pin = 5 units
+  // Set section height (defines full scroll length)
+  section.style.height = `${totalUnits * 100}vh`;
 
-  const stackTopOffset = window.innerHeight * 0.05; // Matches 5vh top
-  
-  // Update section height
-  section.style.height = `${totalScroll * 100}vh`;
+  // ❌ REMOVE ALL TRANSITIONS to prevent lag
+  cards.forEach(c => {
+    c.style.transition = "none";
+    c.style.opacity = "1"; // no fade
+  });
 
-  window.addEventListener("scroll", () => {
+  function update() {
     const start = section.offsetTop;
-    const end = start + section.offsetHeight - window.innerHeight;
-    const scrollY = window.scrollY;
-    
-    // Normalize scroll progress (t goes from 0 to totalScroll)
-    const t = Math.max(0, Math.min((scrollY - start) / window.innerHeight, totalScroll));
+    const end   = start + section.offsetHeight - window.innerHeight;
+    const y     = window.scrollY;
 
-    if (scrollY >= start && scrollY <= end) {
-      // 1. PIN: Lock the wrapper in place while inside the section scroll range
+    // pin behavior
+    if (y >= start && y <= end) {
       wrapper.style.position = "fixed";
       wrapper.style.top = "0";
       wrapper.style.left = "0";
-      wrapper.style.right = "0";
-      
-    } else if (scrollY > end) {
-      // 2. UNPIN SMOOTHLY: Scroll has gone past the section's end.
-      // Set position back to relative and push it down to its natural final resting place
+    } else if (y < start) {
       wrapper.style.position = "relative";
-      // This calculates the full vertical distance scrolled, minus the viewport height
-      wrapper.style.top = `${section.offsetHeight - window.innerHeight}px`;
-      
+      wrapper.style.top = "0";
     } else {
-      // 3. BEFORE: For scrolling up above the section start
       wrapper.style.position = "relative";
-      wrapper.style.top = '0';
+      wrapper.style.top = `${section.offsetHeight - window.innerHeight}px`;
     }
 
-    // Card animation logic
+    // normalized scroll t (0 → totalUnits)
+    const t = Math.min(Math.max((y - start) / window.innerHeight, 0), totalUnits);
+
     cards.forEach((card, i) => {
+      // each card uses exactly 1 slot of scroll:
+      // card 0: t = 0 → 1
+      // card 1: t = 1 → 2
+      // card 2: t = 2 → 3
       const local = t - i;
-      const z = 100 + i; 
-      const finalYOffset = restingGap * i;
-      const x = 0; 
+
+      let offset;
 
       if (local <= 0) {
-        card.style.transform = `translate(${x}px, 120%)`;
-        card.style.opacity = "0";
-      } else if (local > 0 && local < 1) {
-        // Sliding phase 
-        const restingPosition = stackTopOffset - finalYOffset;
-        const startY = (window.innerHeight * 1.2) - (slideGap * i);
-        const y = startY - (local * (startY - restingPosition));
-        card.style.transform = `translate(${x}px, ${y}px)`; 
-        card.style.opacity = local;
+        // before the card starts → keep below
+        offset = 120;
+      } else if (local >= 1) {
+        // after reaching its resting position → keep at 0%
+        offset = 0;
       } else {
-        // Fully stacked and pinned phase 
-        card.style.transform = `translate(${x}px, ${stackTopOffset - finalYOffset}px)`;
-        card.style.opacity = "1";
+        // in-between, follow EXACT scroll position
+        offset = 120 * (1 - local);
       }
 
-      card.style.zIndex = z;
+      card.style.transform = `translateY(${offset}%)`;
     });
-  });
+  }
+
+  window.addEventListener("scroll", update);
+  update();
 })();
 </script>
+
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
