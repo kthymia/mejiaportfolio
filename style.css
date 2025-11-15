@@ -988,6 +988,7 @@ footer a {
   background: #000;
   color: #fff;
   overflow: hidden;
+  padding-bottom: 20vh;
 }
 
 .projects-wrapper {
@@ -1188,6 +1189,7 @@ footer a {
 
 
 
+
 /* 🌈 MY GRAPHIC DESIGNS — Opposite Parallax Gallery */
 .graphics-section {
   position: relative;
@@ -1196,7 +1198,7 @@ footer a {
   background: #000;
   overflow: hidden;
 
-  padding-top: 6rem;    /* spacing above the tracks */
+  padding-top: 14rem;    /* spacing above the tracks */
   padding-bottom: 8rem; /* spacing below the tracks */
 }
 
