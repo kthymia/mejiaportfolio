@@ -1,930 +1,743 @@
-/* ------------------------------ */
-/* BASIC SETUP */
-/* ------------------------------ */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --primary-bg: #000;
-  --secondary-bg: #1a1a1a;
-  --text-light: #f0f0f0;
-  --nav-text: #888;
-  --accent-start: #e02a90;
-  --accent-end: #9048f0;
-  --font: "Inter", sans-serif;
-}
-
-body {
-  font-family: var(--font);
-  color: var(--text-light);
-  background-color: var(--primary-bg);
-  overflow-x: hidden;
-  line-height: 1.6;
-  scroll-behavior: smooth;
-}
-
-/* ------------------------------ */
-/* NAVBAR */
-/* ------------------------------ */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  background: transparent;
-  padding: 2rem 0;
-  z-index: 10;
-}
-
-.navbar nav a {
-  margin: 0 2rem;
-  color: var(--nav-text);
-  font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 1.5px;
-  transition: color 0.3s;
-}
-
-.navbar nav a:hover {
-  color: var(--text-light);
-}
-
-/* ------------------------------ */
-/* HERO SECTION */
-/* ------------------------------ */
-.hero-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 7rem 5% 4rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 3rem;
-}
-
-.hero-content {
-  max-width: 540px;
-}
-
-.main-heading {
-  font-size: clamp(3.5rem, 8vw, 5.5rem);
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -2px;
-  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
-  -webkit-background-clip: text;
-  color: transparent;
-  line-height: 0.95;
-  margin-bottom: 2rem;
-}
-
-.hero-description {
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
-  color: #ccc;
-  margin-bottom: 2.5rem;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-/* ------------------------------ */
-/* BUTTON */
-/* ------------------------------ */
-.gradient-button {
-  display: inline-block;
-  padding: 1rem 2.7rem;
-  background: linear-gradient(90deg, var(--accent-start) 0%, var(--accent-end) 100%);
-  color: #fff;
-  font-weight: 700;
-  border-radius: 30px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 0 20px rgba(224, 42, 144, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.gradient-button:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 0 30px rgba(224, 42, 144, 0.7);
-}
-
-/* ------------------------------ */
-/* IMAGE SIDE */
-/* ------------------------------ */
-.character-container {
-  position: relative;
-  width: 520px;   /* increased from 380px */
-  height: auto;   /* allows natural scaling */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.animated-character {
-  width: 700px;   /* match container width */
-  height: auto;
-  object-fit: contain;
-  border-radius: 0;
-  border: none;
-  z-index: 1;
-  position: relative;
-  animation: float 4s ease-in-out infinite;
-}
-
-
-.character-container::before {
-  content: "";
-  position: absolute;
-  width: 380px;
-  height: 380px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(224, 42, 144, 0.5) 0%, rgba(0, 0, 0, 0) 70%);
-  filter: blur(30px);
-  z-index: 0;
-}
-
-.animated-character {
-  width: 900px;   /* match container width */
-  height: auto;
-  object-fit: contain;
-  border-radius: 0;
-  border: none;
-  z-index: 1;
-  position: relative;
-  animation: float 4s ease-in-out infinite;
-}
-
-
-
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-/* ------------------------------ */
-/* PROJECTS, ABOUT, FOOTER */
-/* ------------------------------ */
-.content-section {
-  padding: 8rem 5%;
-  text-align: center;
-  background-color: var(--secondary-bg);
-}
-
-h2 {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-}
-
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.project-card {
-  background: #111;
-  padding: 2rem;
-  border-radius: 10px;
-  border: 1px solid #333;
-  transition: transform 0.3s ease;
-}
-.project-card:hover {
-  transform: translateY(-5px);
-}
-
-footer {
-  text-align: center;
-  padding: 3rem 5%;
-  background-color: var(--primary-bg);
-  border-top: 1px solid #333;
-}
-
-footer a {
-  color: var(--accent-start);
-}
-
-
-/* ------------------------------ */
-/* RESPONSIVE */
-/* ------------------------------ */
-@media (max-width: 900px) {
-  .hero-section {
-    flex-direction: column;
-    text-align: center;
-  }
-  .character-container {
-    width: 300px;
-    height: 300px;
-  }
-}
-
-/* ✨ Sparkle Trail Effect */
-.sparkle {
-  position: fixed;
-  pointer-events: none;
-  border-radius: 50%;
-  z-index: 9999;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-  animation: sparkleFade 1.2s linear forwards;
-}
-
-@keyframes sparkleFade {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0);
-  }
-}
-
-/* 🎓 CERTIFICATES SECTION – 2 LAYERS, ORIGINAL SIZE */
-.certificates-section {
-  position: relative;
-  height: 200vh;            /* room for 2 big rows + title */
-  background: #000;
-  overflow: hidden;
-  padding-top: 5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.section-title {
-  font-size: clamp(3rem, 5vw, 3.5rem);
-  font-weight: 900;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-  background: linear-gradient(90deg, #e02a90, #9048f0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* wrapper */
-.scroll-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-/* tracks */
-.scroll-track {
-  position: absolute;
-  display: flex;
-  gap: 20px;
-  width: max-content;
-  white-space: nowrap;
-}
-
-/* TOP ROW – moves left */
-.layer-top {
-  top: 22vh;                         /* vertical position of row 1 */
-  animation: scroll-left 45s linear infinite;
-}
-
-/* BOTTOM ROW – moves right */
-.layer-bottom {
-  top: 85vh;                         /* vertical position of row 2 */
-  animation: scroll-right 50s linear infinite;
-  opacity: 0.95;
-}
-
-/* CERT IMAGE SIZE – back to big/original */
-.scroll-track img {
-  width: 520px;
-  height: auto;
-  object-fit: contain;
-  border-radius: 12px;
-  transition: transform 0.25s ease, box-shadow 0.35s ease;
-  box-shadow: 0 0 0px rgba(224, 42, 144, 0); /* default none */
-}
-
-.scroll-track img:hover {
-  transform: scale(1.03);
-  box-shadow:
-      0 0 25px rgba(224, 42, 144, 0.7),
-      0 0 45px rgba(144, 72, 240, 0.5),
-      0 0 70px rgba(255, 255, 255, 0.4);
-  z-index: 20;
-}
-
-/* INFINITE LOOP ANIMATIONS
-   (works because each track contains two identical sets) */
-@keyframes scroll-left {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* shift by one full set */
-}
-
-@keyframes scroll-right {
-  0%   { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
-
-/* optional tweak for smaller screens */
-@media (max-width: 768px) {
-  .certificates-section {
-    height: 110vh;
-  }
-  .scroll-track img {
-    width: 360px;
-    height: 260px;
-  }
-  .layer-top { top: 18vh; }
-  .layer-bottom { top: 60vh; }
-}
-
-
-
-/* 🌟 ABOUT ME SECTION (Parallax + Fade) */
-.about-me-section {
-  position: relative;
-  min-height: 100vh;
-  background: #000;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden;
-  padding: 2rem 2rem;
-  perspective: 1000px; /* creates depth for parallax */
-}
-
-.about-content {
-  max-width: 800px;
-  position: relative;
-  z-index: 5;
-  transition: transform 2s ease-in-out, opacity 2s ease-in-out;
-  opacity: 0;
-  transform: translateY(80px);
-}
-
-.about-title {
-  font-size: 5rem;
-  font-weight: 900;
-  letter-spacing: -2px;
-  background: linear-gradient(90deg, #e02a90, #9048f0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 2rem;
-  transition: transform 2s ease-in-out, opacity 2s ease-in-out;
-  transform: translateY(60px);
-  opacity: 0;
-}
-
-/* Fix for About Me button */
-.about-btn {
-  display: inline-block;
-  margin-top: 2rem;             /* adds space above */
-  margin-bottom: 5rem; /* Added margin below the button */
-  padding: 1rem 3rem;           /* makes the button balanced */
-  background: linear-gradient(90deg, #e02a90 0%, #9048f0 100%);
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.1rem;
-  border-radius: 40px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 0 20px rgba(224, 42, 144, 0.4);
-  transition: transform 2.5s ease, box-shadow 2.5s ease;
-  position: relative;
-  z-index: 10;                  /* ensures it stays above shapes */
-}
-
-.about-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 0 35px rgba(224, 42, 144, 0.6);
-}
-
-/* Ensure paragraph above has breathing room */
-.about-text {
-  margin-bottom: 3rem;          /* increases gap before button */
-}
-
-
-/* Decorative shapes (back layers) */
-.about-shape {
-  position: absolute;
-  width: 260px;
-  opacity: 0;
-  transform: scale(0.9);
-  transition: transform 3s ease-in-out, opacity 2s ease-in-out;
-}
-
-.shape-left {
-  left: -300px;
-  top: 25%;
-  z-index: 1;
-}
-
-.shape-right {
-  right: -300px;
-  bottom: 25%;
-  z-index: 1;
-}
-
-/* --- Active (scroll trigger) --- */
-.about-me-section.active .about-title {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.about-me-section.active .about-text,
-.about-me-section.active .about-btn {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.3s;
-}
-
-.about-me-section.active .about-content {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.about-me-section.active .shape-left {
-  opacity: 0.6;
-  transform: translateX(250px) translateZ(-100px) scale(1);
-}
-
-.about-me-section.active .shape-right {
-  opacity: 0.6;
-  transform: translateX(-250px) translateZ(-150px) scale(1);
-}
-
-/* --- Fade in while entering --- */
-.about-me-section.active .about-title,
-.about-me-section.active .about-text,
-.about-me-section.active .about-btn,
-.about-me-section.active .about-shape {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 2s ease, transform 2s ease;
-}
-
-/* --- Fade out only when scrolled past --- */
-.about-me-section.fade-out .about-title,
-.about-me-section.fade-out .about-text,
-.about-me-section.fade-out .about-btn,
-.about-me-section.fade-out .about-shape {
-  opacity: 0;
-  transform: translateY(80px);
-  transition: opacity 2.5s ease, transform 2.5s ease;
-}
-
-
-
-
-/* 💼 EXPERIENCE & SKILLS SECTION */
-.experience-section {
-  position: relative;
-  min-height: 120vh;
-  background-color: #fff;
-  color: #000;
-  padding: 8rem 10%;
-  overflow: hidden;
-  border-top-left-radius: 60px;
-  border-top-right-radius: 60px;
-  box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.3);
-}
-
-/* --- Title --- */
-.exp-title {
-  font-size: 5rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  text-align: center;
-  color: #000;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1.2s ease, transform 1.2s ease;
-  letter-spacing: -2px;
-  margin-bottom: 6rem;
-}
-
-/* --- Container --- */
-.exp-container {
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-/* --- Each Experience Item --- */
-.exp-item {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding-top: 2rem;
-  opacity: 0;
-  transform: translateY(60px);
-  transition: opacity 1s ease, transform 1s ease;
-  will-change: opacity, transform;
-}
-
-.exp-item.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.exp-item h3 {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #111;
-  margin-bottom: 1rem;
-}
-
-.exp-item p {
-  font-size: 1.1rem;
-  color: #333;
-  line-height: 1.6;
-  max-width: 700px;
-}
-
-/* Fade-out effect when leaving */
-.exp-item.fade-out {
-  opacity: 0;
-  transform: translateY(60px);
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-/* --- Responsive --- */
-@media (max-width: 768px) {
-  .exp-title {
-    font-size: 3.2rem;
-    margin-bottom: 4rem;
-  }
-
-  .exp-container {
-    gap: 3rem;
-  }
-
-  .exp-item h3 {
-    font-size: 1.6rem;
-  }
-
-  .exp-item p {
-    font-size: 1rem;
-  }
-}
-
-/* 🌈 PROJECTS SECTION — Locked, properly spaced stacking */
-.projects-section {
-  position: relative;
-  background: #000;
-  color: #fff;
-  overflow: hidden;
-}
-
-.projects-wrapper {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 10;
-}
-
-.projects-title {
-  position: absolute;
-  top: 6vh; /* Title position near the top of the viewport */
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 900;
-  background: linear-gradient(90deg, #e02a90, #9048f0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  z-index: 20; /* Ensure title is always above the cards */
-  pointer-events: none;
-}
-
-/* Move stacks further down for breathing space. 
-   Set this value (e.g., 30vh) to match the `stackTopOffset` in your JavaScript. */
-.projects-stack {
-  position: absolute;
-  top: 30vh; 
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(1100px, 86vw);
-  height: 70vh;
-  /* Required for the 3D stacking effect in JS */
-  transform-style: preserve-3d;
-}
-
-/* Card design */
-.project-card {
-  position: absolute;
-  width: 100%;
-  background: #111;
-  border-radius: 22px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.08);
-  padding: 2.5rem;
-  /* Initial hidden state, controlled by JS scroll */
-  transform: translateY(120%);
-  opacity: 0;
-  transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-  backface-visibility: hidden;
-}
-
-.project-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.6rem;
-}
-
-.project-number {
-  font-size: 2.2rem;
-  font-weight: 900;
-}
-
-.project-info h3 {
-  font-size: 1rem;
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.project-info p {
-  margin: 0.25rem 0 0;
-  opacity: 0.8;
-}
-
-.project-btn {
-  padding: 0.55rem 1.4rem;
-  border: 1.5px solid #fff;
-  border-radius: 24px;
-  color: #fff;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-.project-btn:hover {
-  background: linear-gradient(90deg, #e02a90, #9048f0);
-  border-color: transparent;
-  box-shadow: 0 0 25px rgba(224, 42, 144, 0.3);
-}
-
-.project-images {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 1rem;
-}
-
-.project-images img {
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-  border-radius: 16px;
-}
-.project-images img:first-child {
-  grid-row: span 2;
-  height: 500px;
-}
-
-
-/* 🌈 MY GRAPHIC DESIGNS — Opposite Parallax Gallery */
-.graphics-section {
-  position: relative;
-  width: 100%;
-  height: 220vh;        /* FULL HEIGHT – prevents overlap */
-  background: #000;
-  overflow: hidden;
-
-  padding-top: 6rem;    /* spacing above the tracks */
-  padding-bottom: 8rem; /* spacing below the tracks */
-}
-
-/* Title */
-.graphics-title {
-  position: sticky;
-  top: 5rem;
-  z-index: 10;
-  text-align: center;
-  font-size: clamp(3rem, 8vw, 7rem);
-  font-weight: 900;
-  background: linear-gradient(90deg, #e02a90, #9048f0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -2px;
-  pointer-events: none;
-  margin-bottom: 3rem;
-}
-
-/* TRACK WRAPPER */
-.graphics-scroll-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-/* TRACKS (left + right) */
-.graphics-track {
-  position: absolute;
-  display: flex;
-  gap: 0.1rem;
-  will-change: transform;
-  transition: transform 0.25s ease-out;
-}
-
-/* FIRST ROW — higher */
-.graphics-top {
-  top: 18vh; 
-  left: 0;
-}
-
-/* SECOND ROW — lower */
-.graphics-bottom {
-  top: 48vh; 
-  left: 0;
-  opacity: 0.92;
-}
-
-/* IMAGES */
-.graphics-track img {
-  width: 380px;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 16px;
-  border: 1.5px solid rgba(224, 42, 144, 0.4);
-  box-shadow: 0 0 25px rgba(144, 72, 240, 0.25);
-  flex-shrink: 0;
-  background: #111;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.graphics-track img:hover {
-  transform: scale(1.06);
-  box-shadow: 0 0 35px rgba(224, 42, 144, 0.6);
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .graphics-track img {
-    width: 260px;
-    height: 200px;
-  }
-
-  .graphics-top { top: 15vh; } 
-  .graphics-bottom { top: 45vh; } 
-}
-
-/* 📞 CONTACT SECTION */
-.contact-section {
-  background-color: #fff; 
-  color: #000;
-  padding: 8rem 5%;
-  min-height: 80vh; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kathlyn's Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="navbar">
+    <nav>
+      <a href="#about-me">ABOUT</a>
+      <a href="#experience">SKILLS</a>
+      <a href="#projects">PROJECTS</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </header>
+
+  <section id="hero" class="hero-section">
+    <div class="hero-content">
+      <h1 class="main-heading">HI, I'M KATHLYN</h1>
+      <p class="hero-description">
+        A VERSATILE COMPUTER SCIENCE STUDENT WITH PROVEN TECHNICAL EXPERTISE AND PROFICIENT SKILLS IN GRAPHIC DESIGN AND DIGITAL MEDIA.
+      </p>
+      <a href="#contact" class="gradient-button">CONTACT ME</a>
+    </div>
+
+    <div class="character-container">
+      <img src="front pic.png" alt="Kathlyn Mejia, Computer Science Student and Creative Designer" class="animated-character" />
+    </div>
+  </section>
+
+ <section id="certificates" class="certificates-section">
+  <h2 class="section-title">My Certificates</h2>
+
+  <div class="scroll-wrapper">
+
+    <!-- TOP ROW – LEFT -->
+    <div class="scroll-track layer-top">
+      <!-- set 1 -->
+      <img src="cert1.jpg" alt="">
+      <img src="cert2.jpg" alt="">
+      <img src="cert3.jpg" alt="">
+      <img src="cert4.jpg" alt="">
+      <img src="cert5.jpg" alt="">
+      <img src="cert6.jpg" alt="">
+      <img src="cert12.jpg" alt="">
+      <img src="cert13.jpg" alt="">
+      <img src="cert17.jpg" alt="">
+      <!-- set 2 (duplicate for seamless loop) -->
+      <img src="cert1.jpg" alt="">
+      <img src="cert2.jpg" alt="">
+      <img src="cert3.jpg" alt="">
+      <img src="cert4.jpg" alt="">
+      <img src="cert5.jpg" alt="">
+      <img src="cert6.jpg" alt="">
+      <img src="cert12.jpg" alt="">
+      <img src="cert13.jpg" alt="">
+      <img src="cert17.jpg" alt="">
+    </div>
+
+    <!-- BOTTOM ROW – RIGHT -->
+    <div class="scroll-track layer-bottom">
+      <!-- set 1 -->
+      <img src="cert16.jpg" alt="">
+      <img src="cert15.jpg" alt="">
+      <img src="cert14.jpg" alt="">
+      <img src="cert11.jpg" alt="">
+      <img src="cert10.jpg" alt="">
+      <img src="cert9.jpg" alt="">
+      <img src="cert8.jpg" alt="">
+      <img src="cert7.jpg" alt="">
+      <!-- set 2 (duplicate for seamless loop) -->
+      <img src="cert16.jpg" alt="">
+      <img src="cert15.jpg" alt="">
+      <img src="cert14.jpg" alt="">
+      <img src="cert11.jpg" alt="">
+      <img src="cert10.jpg" alt="">
+      <img src="cert9.jpg" alt="">
+      <img src="cert8.jpg" alt="">
+      <img src="cert7.jpg" alt="">
+    </div>
+
+  </div>
+</section>
+
+
+<section id="about-me" class="about-me-section">
+  <img src="shape-left.png" alt="" class="about-shape shape-left">
+  <img src="shape-right.png" alt="" class="about-shape shape-right">
+
+  <div class="about-content">
+    <h2 class="about-title">ABOUT ME</h2>
+    <p class="about-text">
+  I'm a Computer Science student and multidisciplinary creative specializing 
+  in programming, UI/UX design, and digital media. With experience serving 
+  100+ clients globally, I produce high-converting graphics, ad creatives, and 
+  videos that boost engagement and strengthen brand identity.<br><br>
+
+  Alongside my design expertise, I have a strong technical foundation in 
+  software development, databases, and AI-driven systems, supported by 
+  certifications in LLMs, Python, C#, and Microsoft technologies.<br><br>
+
+  I love blending logic and creativity to build purposeful, visually compelling 
+  solutions—and I’m always open to meaningful collaborations.
+</p>
+    <a href="#contact" class="gradient-button about-btn">CONTACT ME</a>
+  </div>
+</section>
+
+
+<section id="experience" class="experience-section">
+  <h2 class="exp-title">EXPERIENCE & SKILLS</h2>
+
+  <div class="exp-container">
+    <div class="exp-item">
+      <h3>01. Graphic Design</h3>
+      <p>Experienced in creating modern visuals, brand identities, and social media assets tailored for diverse industries and clients.</p>
+    </div>
+
+    <div class="exp-item">
+      <h3>02. 3D Modeling & Rendering</h3>
+      <p>Skilled in producing realistic 3D visuals for marketing, product design, and promotional content using tools like Blender and Cinema 4D.</p>
+    </div>
+
+    <div class="exp-item">
+      <h3>03. UI / UX Design</h3>
+      <p>Designing seamless and intuitive digital experiences that combine creativity with functionality for web and mobile platforms.</p>
+    </div>
+
+    <div class="exp-item">
+      <h3>04. Motion Graphics</h3>
+      <p>Creating animated assets, product promos, and storytelling visuals that engage audiences and elevate brand presence.</p>
+    </div>
+  </div>
+</section>
+
+
+
+  <section id="projects" class="projects-section">
+  <div class="projects-wrapper">
+    <h2 class="projects-title">PROJECTS</h2>
+
+    <div class="projects-stack">
+      <article class="project-card">
+        <header class="project-header">
+          <div class="project-number">01</div>
+          <div class="project-info">
+            <h3>CLIENT</h3>
+            <p>Skyline Studios</p>
+          </div>
+          <a class="project-btn" href="#">LIVE PROJECT</a>
+        </header>
+        <div class="project-images">
+          <img src="p1-main.jpg" alt="Project 1 main">
+          <img src="p1-sub1.jpg" alt="Project 1 sub">
+          <img src="p1-sub2.jpg" alt="Project 1 sub">
+        </div>
+      </article>
+
+      <article class="project-card">
+        <header class="project-header">
+          <div class="project-number">02</div>
+          <div class="project-info">
+            <h3>CLIENT</h3>
+            <p>Pixel Forge</p>
+          </div>
+          <a class="project-btn" href="#">LIVE PROJECT</a>
+        </header>
+        <div class="project-images">
+          <img src="p2-main.jpg" alt="Project 2 main">
+          <img src="p2-sub1.jpg" alt="Project 2 sub">
+          <img src="p2-sub2.jpg" alt="Project 2 sub">
+        </div>
+      </article>
+
+      <article class="project-card">
+        <header class="project-header">
+          <div class="project-number">03</div>
+          <div class="project-info">
+            <h3>CLIENT</h3>
+            <p>Design Haven</p>
+          </div>
+          <a class="project-btn" href="#">LIVE PROJECT</a>
+        </header>
+        <div class="project-images">
+          <img src="p3-main.jpg" alt="Project 3 main">
+          <img src="p3-sub1.jpg" alt="Project 3 sub">
+          <img src="p3-sub2.jpg" alt="Project 3 sub">
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<section id="graphics" class="graphics-section">
+  <h2 class="graphics-title">My Graphic Designs</h2>
+
+  <div class="graphics-scroll-wrapper">
+
+    <div class="graphics-track graphics-top">
+      <img src="g1.jpg" alt="">
+      <img src="g2.jpg" alt="">
+      <img src="g3.jpg" alt="">
+      <img src="g4.jpg" alt="">
+      <img src="g5.jpg" alt="">
+    </div>
+
+    <div class="graphics-track graphics-bottom">
+      <img src="g6.jpg" alt="">
+      <img src="g7.jpg" alt="">
+      <img src="g8.jpg" alt="">
+      <img src="g9.jpg" alt="">
+      <img src="g10.jpg" alt="">
+    </div>
+
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="contact-container">
+    <div class="contact-left">
+      <h2 class="contact-title">LET'S GET IN TOUCH</h2>
+      <a href="mailto:kathlynmejia24@gmail.com" class="contact-email">kathlynmejia24@gmail.com</a>
+      </div>
+   <div class="contact-right">
+  <form id="contactForm" class="contact-form" action="https://formspree.io/f/mnnljerg" method="POST">
+    <input type="text" name="full-name" placeholder="Full Name*" required>
+    <input type="email" name="_replyto" placeholder="Email*" required>
+    <input type="tel" name="phone" placeholder="Phone">
+    <textarea name="message" placeholder="Message"></textarea>
+    <button type="submit" class="send-button">SEND</button>
+  </form>
   
-  /* Initial hidden state for animation */
-  opacity: 0;
-  transform: translateY(80px);
-  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
-}
+  <p id="successMessage" class="success-message" style="display: none;">
+    Message sent successfully! Thank you.
+  </p>
+</div>
+  </div>
+</section>
 
-.contact-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
-.contact-container {
-  display: flex;
-  flex-wrap: wrap; 
-  gap: 5rem;
-  max-width: 1200px;
-  width: 100%;
-  align-items: flex-start; 
-}
+  <footer>
+    <p>Let's connect: <a href="mailto:kathlynmejia24@gmail.com">kathlynmejia24@gmail.com</a></p>
+  </footer>
 
-.contact-left {
-  flex: 1; 
-  min-width: 300px; 
-  text-align: left;
-}
+  <script>
+    const hero = document.querySelector('.hero-section');
 
-.contact-title {
-  font-size: clamp(3rem, 5vw, 4.5rem); 
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  color: #000; 
-  text-transform: uppercase;
-}
+    hero.addEventListener('mousemove', (e) => {
+      const sparkle = document.createElement('span');
+      sparkle.classList.add('sparkle');
 
-.contact-email {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  color: #000;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
+      // Random size and color variation
+      const size = Math.random() * 8 + 4; // 4px to 12px
+      sparkle.style.width = `${size}px`;
+      sparkle.style.height = `${size}px`;
 
-.contact-email:hover {
-  color: var(--accent-start); 
-}
+      const colors = ['#e02a90', '#9048f0', '#ffb6ff', '#ffffff'];
+      sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
 
-/* Form Side */
-.contact-right {
-  flex: 1;
-  min-width: 300px;
-}
+      // Position sparkles
+      sparkle.style.left = e.clientX + 'px';
+      sparkle.style.top = e.clientY + 'px';
 
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  max-width: 500px; 
-  margin-left: auto; 
-  transition: opacity 0.5s ease-out;
-}
+      document.body.appendChild(sparkle);
 
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 1rem 1.2rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-family: var(--font);
-  font-size: 1rem;
-  color: #000;
-  background-color: #f9f9f9;
-}
+      // Random animation direction
+      const xMove = (Math.random() - 0.5) * 80;
+      const yMove = (Math.random() - 0.5) * 80;
+      sparkle.animate(
+        [
+          { transform: 'translate(0, 0)', opacity: 1 },
+          { transform: `translate(${xMove}px, ${yMove}px)`, opacity: 0 }
+        ],
+        {
+          duration: 1000 + Math.random() * 500,
+          easing: 'ease-out'
+        }
+      );
 
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-  color: #888;
-}
+      setTimeout(() => sparkle.remove(), 1200);
+    });
+  </script>
 
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: var(--accent-end);
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(144, 72, 240, 0.2);
-}
 
-.contact-form textarea {
-  min-height: 120px; 
-  resize: vertical;
-}
 
-.send-button {
-  display: inline-block;
-  padding: 1rem 2.5rem;
-  background: linear-gradient(90deg, #e02a90 0%, #9048f0 100%);
-  color: #fff;
-  font-weight: 700;
-  border: none;
-  border-radius: 30px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  align-self: flex-start; 
-  min-width: 150px;
-}
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const aboutSection = document.querySelector(".about-me-section");
+  const title = document.querySelector(".about-title");
+  const text = document.querySelector(".about-text");
+  const btn = document.querySelector(".about-btn");
+  const shapeLeft = document.querySelector(".shape-left");
+  const shapeRight = document.querySelector(".shape-right");
 
-.send-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(224, 42, 144, 0.4);
-}
+  let lastScrollY = window.scrollY;
 
-.success-message {
-  color: var(--accent-start); 
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-top: 1.5rem;
-  text-align: center;
-  padding: 1rem;
-  border: 1px solid var(--accent-end);
-  border-radius: 8px;
-}
+  function handleScroll() {
+    const rect = aboutSection.getBoundingClientRect();
+    const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+    const fullyPassed = rect.bottom <= 0 || rect.top >= window.innerHeight;
+    const scrollingDown = window.scrollY > lastScrollY;
 
-/* Responsive adjustments for Contact Section */
-@media (max-width: 768px) {
-  .contact-container {
-    flex-direction: column;
-    gap: 3rem;
+    // SCROLL DOWN → Fade in if entering viewport
+    if (inViewport && scrollingDown) {
+      aboutSection.classList.add("active");
+      aboutSection.classList.remove("fade-out");
+    }
+
+    // SCROLL UP → Keep it visible while still in viewport
+    if (inViewport && !scrollingDown) {
+      aboutSection.classList.add("active");
+      aboutSection.classList.remove("fade-out");
+    }
+
+    // FADE OUT → only when section is fully passed out of view
+    if (fullyPassed) {
+      aboutSection.classList.remove("active");
+      aboutSection.classList.add("fade-out");
+    }
+
+    // Optional: parallax motion while visible
+    if (inViewport) {
+      const scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+      title.style.transform = `translateY(${60 - scrollProgress * 40}px)`;
+      text.style.transform = `translateY(${80 - scrollProgress * 50}px)`;
+      btn.style.transform = `translateY(${80 - scrollProgress * 40}px)`;
+      shapeLeft.style.transform = `translateX(${250 - scrollProgress * 120}px) scale(1)`;
+      shapeRight.style.transform = `translateX(${-250 + scrollProgress * 120}px) scale(1)`;
+    }
+
+    lastScrollY = window.scrollY;
   }
 
-  .contact-left {
-    text-align: center;
+  window.addEventListener("scroll", handleScroll);
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const expTitle = document.querySelector(".exp-title");
+  const expItems = document.querySelectorAll(".exp-item");
+
+  // --- Title observer (fades in when section starts appearing)
+  const titleObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        expTitle.style.opacity = "1";
+        expTitle.style.transform = "translateY(0)";
+      } else {
+        expTitle.style.opacity = "0";
+        expTitle.style.transform = "translateY(40px)";
+      }
+    });
+  }, { threshold: 0.3 });
+
+  titleObserver.observe(expTitle);
+
+  // --- Items observer (each fades individually)
+  const itemObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        entry.target.classList.remove("fade-out");
+      } else {
+        entry.target.classList.remove("visible");
+        entry.target.classList.add("fade-out");
+      }
+    });
+  }, { threshold: 0.4 });
+
+  expItems.forEach((item) => itemObserver.observe(item));
+});
+</script>
+
+<script>
+(() => {
+  const section = document.querySelector(".projects-section");
+  const wrapper = section.querySelector(".projects-wrapper");
+  const cards = [...wrapper.querySelectorAll(".project-card")];
+  
+  const numCards = cards.length; 
+
+  const slideGap = 120;   // Vertical distance used when sliding
+  const restingGap = -90;  // <-- Height of the project header (approx. 90px)
+  const xOffset = 0;      // No horizontal shift (centered stack)
+  const totalScroll = numCards * 1.1; 
+
+  const stackTopOffset = window.innerHeight * 0.05; 
+  section.style.height = `${(numCards + 1.5) * 100}vh`;
+
+  window.addEventListener("scroll", () => {
+    const start = section.offsetTop;
+    const end = start + section.offsetHeight - window.innerHeight;
+    const scrollY = window.scrollY;
+    
+    const t = Math.max(0, Math.min((scrollY - start) / window.innerHeight, totalScroll));
+
+    if (scrollY >= start && scrollY <= end) {
+      wrapper.style.position = "fixed";
+      wrapper.style.top = "0";
+      wrapper.style.left = "0";
+      wrapper.style.right = "0";
+    } else {
+      wrapper.style.position = "relative";
+    }
+
+    // Card animation logic
+    cards.forEach((card, i) => {
+      const local = t - i;
+      
+      // Z-INDEX: Ensures the last card in HTML (Project 01) is on top
+      const z = 100 + i; 
+
+      const finalYOffset = restingGap * i;
+      const x = 0; 
+
+      if (local <= 0) {
+        card.style.transform = `translate(${x}px, 120%)`;
+        card.style.opacity = "0";
+      } else if (local > 0 && local < 1) {
+        
+        const restingPosition = stackTopOffset - finalYOffset;
+        const startY = (window.innerHeight * 1.2) - (slideGap * i);
+
+        const y = startY - (local * (startY - restingPosition));
+        
+        card.style.transform = `translate(${x}px, ${y}px)`; 
+        card.style.opacity = local;
+      } else {
+        // Card is fully stacked and resting
+        card.style.transform = `translate(${x}px, ${stackTopOffset - finalYOffset}px)`;
+        card.style.opacity = "1";
+      }
+
+      card.style.zIndex = z;
+    });
+  });
+})();
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const projectSection = document.querySelector(".projects-section");
+  const testimonials = document.querySelector(".testimonials-section");
+  const cards = testimonials.querySelectorAll(".testimonial-card");
+
+  window.addEventListener("scroll", () => {
+    const rect = projectSection.getBoundingClientRect();
+
+    // Trigger the slide up when the Projects section is 80% finished exiting the viewport
+    if (rect.bottom <= window.innerHeight * 0.2) { 
+      testimonials.classList.add("active");
+    }
+    // Optional: You can add an 'else' here if you want the panel to slide back down 
+    // when scrolling up into the projects section.
+  });
+
+  // Animate testimonial cards one by one using Intersection Observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // Only apply the delay when the card enters the viewport
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+        entry.target.style.transitionDelay = `${i * 0.2}s`;
+        observer.unobserve(entry.target); // Stop observing once animated
+      }
+    });
+  }, { threshold: 0.2 });
+
+  cards.forEach(card => observer.observe(card));
+});
+</script>
+
+
+
+<script>
+(() => {
+  const section = document.querySelector(".projects-section");
+  const wrapper = section.querySelector(".projects-wrapper");
+  const cards = [...wrapper.querySelectorAll(".project-card")];
+  
+  const numCards = cards.length; 
+
+  const slideGap = 120;   
+  const restingGap = -90;  // <-- FIX 1: Must be positive 90 for stability
+  const xOffset = 0;      
+  
+  const pinDuration = 2; // Time to keep the stack fixed (2 extra viewport heights)
+  const totalScroll = numCards + pinDuration; // 3 cards + 2 pin = 5 units
+
+  const stackTopOffset = window.innerHeight * 0.05; // Matches 5vh top
+  
+  // Update section height
+  section.style.height = `${totalScroll * 100}vh`;
+
+  window.addEventListener("scroll", () => {
+    const start = section.offsetTop;
+    const end = start + section.offsetHeight - window.innerHeight;
+    const scrollY = window.scrollY;
+    
+    // Normalize scroll progress (t goes from 0 to totalScroll)
+    const t = Math.max(0, Math.min((scrollY - start) / window.innerHeight, totalScroll));
+
+    if (scrollY >= start && scrollY <= end) {
+      // 1. PIN: Lock the wrapper in place while inside the section scroll range
+      wrapper.style.position = "fixed";
+      wrapper.style.top = "0";
+      wrapper.style.left = "0";
+      wrapper.style.right = "0";
+      
+    } else if (scrollY > end) {
+      // 2. UNPIN SMOOTHLY: Scroll has gone past the section's end.
+      // Set position back to relative and push it down to its natural final resting place
+      wrapper.style.position = "relative";
+      // This calculates the full vertical distance scrolled, minus the viewport height
+      wrapper.style.top = `${section.offsetHeight - window.innerHeight}px`;
+      
+    } else {
+      // 3. BEFORE: For scrolling up above the section start
+      wrapper.style.position = "relative";
+      wrapper.style.top = '0';
+    }
+
+    // Card animation logic
+    cards.forEach((card, i) => {
+      const local = t - i;
+      const z = 100 + i; 
+      const finalYOffset = restingGap * i;
+      const x = 0; 
+
+      if (local <= 0) {
+        card.style.transform = `translate(${x}px, 120%)`;
+        card.style.opacity = "0";
+      } else if (local > 0 && local < 1) {
+        // Sliding phase 
+        const restingPosition = stackTopOffset - finalYOffset;
+        const startY = (window.innerHeight * 1.2) - (slideGap * i);
+        const y = startY - (local * (startY - restingPosition));
+        card.style.transform = `translate(${x}px, ${y}px)`; 
+        card.style.opacity = local;
+      } else {
+        // Fully stacked and pinned phase 
+        card.style.transform = `translate(${x}px, ${stackTopOffset - finalYOffset}px)`;
+        card.style.opacity = "1";
+      }
+
+      card.style.zIndex = z;
+    });
+  });
+})();
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const testimonialsSection = document.querySelector(".testimonials-section");
+  const scrollTrack = document.querySelector(".scroll-track-testimonials");
+
+  window.addEventListener("scroll", () => {
+    const rect = testimonialsSection.getBoundingClientRect();
+    const sectionHeight = testimonialsSection.offsetHeight;
+    const viewportHeight = window.innerHeight;
+
+    // Check if the section is currently on screen
+    const isVisible = rect.top < viewportHeight && rect.bottom > 0;
+
+    if (isVisible) {
+      // Calculate scroll progress (0 when section starts, 1 when section ends)
+      const scrollProgress = Math.min(
+        Math.max(0, (viewportHeight - rect.top) / (sectionHeight + viewportHeight)), 
+        1
+      );
+      
+      // Calculate the maximum distance the track needs to scroll horizontally
+      // trackWidth - viewportWidth
+      const trackMaxScroll = scrollTrack.scrollWidth - window.innerWidth;
+      
+      // Apply the horizontal translation
+      // Negative sign moves the track to the left as the user scrolls down
+      const translateX = scrollProgress * trackMaxScroll * -1;
+      
+      scrollTrack.style.transform = `translateX(${translateX}px)`;
+    }
+  });
+
+  // Since this is a continuous scroll effect, we remove the complex Intersection Observer logic
+  // and keep the layout simpler.
+});
+</script>
+
+<script>
+  // GRAPHICS SECTION OPPOSITE SCROLL
+const graphicsSection = document.querySelector(".graphics-section");
+const graphicsTop = document.querySelector(".graphics-top");
+const graphicsBottom = document.querySelector(".graphics-bottom");
+
+window.addEventListener("scroll", () => {
+  const rect = graphicsSection.getBoundingClientRect();
+
+  if (rect.top < window.innerHeight && rect.bottom > 0) {
+    const progress = Math.min(Math.max(-rect.top / rect.height, 0), 1);
+
+    // TOP LAYER moves LEFT
+    const topMax = graphicsTop.scrollWidth - window.innerWidth;
+    graphicsTop.style.transform = `translateX(${-progress * topMax}px)`;
+
+    // BOTTOM LAYER moves RIGHT
+    const bottomMax = graphicsBottom.scrollWidth - window.innerWidth;
+    graphicsBottom.style.transform = `translateX(${progress * bottomMax}px)`;
+  }
+});
+
+</script>
+
+<script>
+  // 📞 CONTACT SECTION SLIDE-UP ANIMATION
+  document.addEventListener("DOMContentLoaded", () => {
+    const contactSection = document.querySelector(".contact-section");
+    
+    // Intersection Observer callback function
+    const observerCallback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Add 'visible' class when the section enters the viewport
+          contactSection.classList.add("visible");
+          // Stop observing once it's animated
+          observer.unobserve(contactSection);
+        }
+      });
+    };
+
+    // Observer options: trigger when 20% of the section is visible
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.2
+    };
+
+    const contactObserver = new IntersectionObserver(observerCallback, observerOptions);
+    
+    // Start observing the contact section
+    contactObserver.observe(contactSection);
+  });
+</script>
+
+<script>
+  // ASYNCHRONOUS FORM SUBMISSION
+  const form = document.getElementById('contactForm');
+  const successMessage = document.getElementById('successMessage');
+
+  if (form) {
+    form.addEventListener('submit', async function(event) {
+      event.preventDefault(); // STOP the default browser redirect
+
+      const formData = new FormData(form);
+      const url = form.action;
+      const button = form.querySelector('.send-button');
+
+      // 1. Show loading state & disable button
+      button.textContent = 'Sending...';
+      button.disabled = true;
+
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json' // Formspree requirement for API success message
+          }
+        });
+
+        if (response.ok) {
+          // 2. SUCCESS: Show message and reset form
+          successMessage.style.display = 'block';
+          form.reset(); // Clears all inputs
+          form.style.display = 'none'; // Hide the form inputs
+        } else {
+          // 3. ERROR: Show error message
+          alert('Oops! There was an issue submitting your form.');
+        }
+
+      } catch (error) {
+        // 4. NETWORK ERROR:
+        alert('A network error occurred. Please try again.');
+      } finally {
+        // 5. Reset button text and state if form is still visible
+        if (form.style.display !== 'none') {
+            button.textContent = 'SEND';
+            button.disabled = false;
+        }
+      }
+    });
+  }
+</script>
+
+<script>
+// 🎓 Perfect smooth infinite certificate scrolling
+document.addEventListener("DOMContentLoaded", () => {
+  const section = document.querySelector(".certificates-section");
+  const topTrack = document.querySelector(".layer-top");
+  const bottomTrack = document.querySelector(".layer-bottom");
+
+  function update() {
+    const rect = section.getBoundingClientRect();
+
+    // Only when visible
+    if (rect.bottom <= 0 || rect.top >= window.innerHeight) return;
+
+    const progress = Math.max(0, Math.min(1, -rect.top / rect.height));
+
+    // One set = half of the track (because you duplicated images twice)
+    const topSet = topTrack.scrollWidth / 2;
+    const bottomSet = bottomTrack.scrollWidth / 2;
+
+    // Speed multiplier
+    const speed = 1.5;
+
+    // TOP track moves left
+    const topX = (progress * topSet * speed) % topSet;
+    topTrack.style.transform = `translateX(${-topX}px)`;
+
+    // BOTTOM track moves right
+    const bottomX = (progress * bottomSet * speed) % bottomSet;
+    bottomTrack.style.transform = `translateX(${bottomX}px)`;
   }
 
-  .contact-form {
-    margin: 0 auto; 
-  }
+  window.addEventListener("scroll", update);
+  window.addEventListener("resize", update);
 
-  .send-button {
-    align-self: center; 
-  }
-}
+  update();
+});
+</script>
+
+
+</body>
+</html>
