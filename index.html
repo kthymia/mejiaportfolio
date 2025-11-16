@@ -7,6 +7,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
 
 <body>
@@ -370,30 +371,32 @@
   </div>
 </section>
 
-
 <section id="graphics" class="graphics-section">
-  <h2 class="graphics-title">My Graphic Designs</h2>
 
-  <div class="graphics-scroll-wrapper">
+    <h2 class="graphics-title">MY GRAPHIC DESIGNS</h2>
 
-    <div class="graphics-track graphics-top">
-      <img src="g1.jpg" alt="">
-      <img src="g2.jpg" alt="">
-      <img src="g3.jpg" alt="">
-      <img src="g4.jpg" alt="">
-      <img src="g5.jpg" alt="">
+    <div class="carousel-container">
+        <div class="carousel-track">
+            <img src="g1.jpg" class="carousel-item">
+            <img src="g2.jpg" class="carousel-item">
+            <img src="g3.jpg" class="carousel-item">
+            <img src="g4.jpg" class="carousel-item">
+            <img src="g5.jpg" class="carousel-item">
+            <img src="g6.jpg" class="carousel-item">
+            <img src="g7.jpg" class="carousel-item">
+            <img src="g8.jpg" class="carousel-item">
+        </div>
     </div>
 
-    <div class="graphics-track graphics-bottom">
-      <img src="g6.jpg" alt="">
-      <img src="g7.jpg" alt="">
-      <img src="g8.jpg" alt="">
-      <img src="g9.jpg" alt="">
-      <img src="g10.jpg" alt="">
+    <div class="carousel-dots"></div>
+
+    <div class="graphics-more-wrapper">
+        <a href="graphics-page.html" class="graphics-more-btn">VIEW ALL DESIGNS</a>
     </div>
 
-  </div>
 </section>
+
+
 
 <section id="contact" class="contact-section">
   <div class="contact-container">
@@ -768,29 +771,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<script>
-  // GRAPHICS SECTION OPPOSITE SCROLL
-const graphicsSection = document.querySelector(".graphics-section");
-const graphicsTop = document.querySelector(".graphics-top");
-const graphicsBottom = document.querySelector(".graphics-bottom");
 
-window.addEventListener("scroll", () => {
-  const rect = graphicsSection.getBoundingClientRect();
-
-  if (rect.top < window.innerHeight && rect.bottom > 0) {
-    const progress = Math.min(Math.max(-rect.top / rect.height, 0), 1);
-
-    // TOP LAYER moves LEFT
-    const topMax = graphicsTop.scrollWidth - window.innerWidth;
-    graphicsTop.style.transform = `translateX(${-progress * topMax}px)`;
-
-    // BOTTOM LAYER moves RIGHT
-    const bottomMax = graphicsBottom.scrollWidth - window.innerWidth;
-    graphicsBottom.style.transform = `translateX(${progress * bottomMax}px)`;
-  }
-});
-
-</script>
 
 <script>
   // 📞 CONTACT SECTION SLIDE-UP ANIMATION
@@ -1104,6 +1085,62 @@ document.addEventListener("DOMContentLoaded", () => {
   cards.forEach(card => observer.observe(card));
 });
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const track = document.querySelector(".carousel-track");
+    const items = Array.from(document.querySelectorAll(".carousel-item"));
+    const dotsContainer = document.querySelector(".carousel-dots");
+
+    let index = 0;
+    const itemWidth = 420; // width + gap
+
+    // Create dots
+    items.forEach((_, i) => {
+        const dot = document.createElement("span");
+        if (i === 0) dot.classList.add("active-dot");
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll(".carousel-dots span");
+
+    function updateCarousel() {
+        items.forEach(item => item.classList.remove("active"));
+        items[index].classList.add("active");
+
+        dots.forEach(dot => dot.classList.remove("active-dot"));
+        dots[index].classList.add("active-dot");
+
+        const center = window.innerWidth / 2 - itemWidth / 2;
+        const offset = -(index * itemWidth) + center;
+
+        track.style.transform = `translateX(${offset}px)`;
+    }
+
+    function autoPlay() {
+        index = (index + 1) % items.length;
+        updateCarousel();
+    }
+
+    let auto = setInterval(autoPlay, 2500);
+
+    // Hover pause
+    track.addEventListener("mouseenter", () => clearInterval(auto));
+    track.addEventListener("mouseleave", () => auto = setInterval(autoPlay, 2500));
+
+    // Dot click
+    dots.forEach((dot, i) => {
+        dot.addEventListener("click", () => {
+            index = i;
+            updateCarousel();
+        });
+    });
+
+    updateCarousel();
+});
+</script>
+
+
 
 
 </body>
