@@ -1204,94 +1204,106 @@ footer a {
 
 
 
-
-
-/* 🌈 MY GRAPHIC DESIGNS — Opposite Parallax Gallery */
+/* =========================
+   GRAPHICS SECTION
+========================= */
 .graphics-section {
-  position: relative;
-  width: 100%;
-  height: 220vh;        /* FULL HEIGHT – prevents overlap */
-  background: #000;
-  overflow: hidden;
-
-  padding-top: 14rem;    /* spacing above the tracks */
-  padding-bottom: 8rem; /* spacing below the tracks */
+    padding: 120px 0 120px;
+    background: #000;
+    text-align: center;
 }
 
-/* Title */
 .graphics-title {
-  position: sticky;
-  top: 5rem;
-  z-index: 10;
-  text-align: center;
-  font-size: clamp(3rem, 8vw, 7rem);
-  font-weight: 900;
-  background: linear-gradient(90deg, #e02a90, #9048f0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -2px;
-  pointer-events: none;
-  margin-bottom: 3rem;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 900;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #e02a90, #9048f0, #4aa3ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* TRACK WRAPPER */
-.graphics-scroll-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+/* === CAROUSEL CONTAINER === */
+.carousel-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
 }
 
-/* TRACKS (left + right) */
-.graphics-track {
-  position: absolute;
-  display: flex;
-  gap: 0.1rem;
-  will-change: transform;
-  transition: transform 0.25s ease-out;
+/* === TRACK === */
+.carousel-track {
+    display: flex;
+    gap: 40px;
+    transition: transform 0.7s ease;
+    padding: 20px 0;
 }
 
-/* FIRST ROW — higher */
-.graphics-top {
-  top: 18vh; 
-  left: 0;
+/* === SLIDES === */
+.carousel-item {
+    width: 380px;
+    height: 460px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    object-fit: cover;
+    box-shadow: 0 0 25px rgba(224,42,144,0.25);
+    opacity: 0.55;
+    transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
-/* SECOND ROW — lower */
-.graphics-bottom {
-  top: 48vh; 
-  left: 0;
-  opacity: 0.92;
+.carousel-item.active {
+    transform: scale(1.05);
+    opacity: 1;
+    box-shadow: 0 0 35px rgba(224,42,144,0.5);
 }
 
-/* IMAGES */
-.graphics-track img {
-  width: 380px;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 16px;
-  border: 1.5px solid rgba(224, 42, 144, 0.4);
-  box-shadow: 0 0 25px rgba(144, 72, 240, 0.25);
-  flex-shrink: 0;
-  background: #111;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* === DOTS === */
+.carousel-dots {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
 }
 
-.graphics-track img:hover {
-  transform: scale(1.06);
-  box-shadow: 0 0 35px rgba(224, 42, 144, 0.6);
+.carousel-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #444;
+    display: block;
+    transition: 0.3s;
+    cursor: pointer;
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
-  .graphics-track img {
-    width: 260px;
-    height: 200px;
-  }
-
-  .graphics-top { top: 15vh; } 
-  .graphics-bottom { top: 45vh; } 
+.carousel-dots .active-dot {
+    background: #e02a90;
+    transform: scale(1.25);
 }
+
+/* === VIEW MORE BUTTON === */
+.graphics-more-wrapper {
+    margin-top: 40px;
+}
+
+.graphics-more-btn {
+    display: inline-block;
+    padding: 1rem 2.7rem;
+    background: linear-gradient(90deg, #e02a90 0%, #9048f0 100%);
+    color: white;
+    font-weight: 700;
+    border-radius: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 0 25px rgba(224, 42, 144, 0.4);
+    transition: 0.3s;
+}
+
+.graphics-more-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 35px rgba(224, 42, 144, 0.7);
+}
+
 
 /* 📞 CONTACT SECTION */
 .contact-section {
@@ -1299,14 +1311,16 @@ footer a {
   color: #000;
   padding: 8rem 5%;
   min-height: 80vh; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
   
-  /* Initial hidden state for animation */
+  /* CRITICAL FIX: Add a large margin-top to clear the 100vh space 
+     used by the pinned graphics section, preventing overlap. */
+  margin-top: 100vh; 
+  
+  /* Initial hidden state for animation (Keep your original animation logic) */
   opacity: 0;
   transform: translateY(80px);
   transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  /* ... rest of your contact styles ... */
 }
 
 .contact-section.visible {
