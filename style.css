@@ -1286,23 +1286,6 @@ footer a {
     margin-top: 40px;
 }
 
-.graphics-more-btn {
-    display: inline-block;
-    padding: 1rem 2.7rem;
-    background: linear-gradient(90deg, #e02a90 0%, #9048f0 100%);
-    color: white;
-    font-weight: 700;
-    border-radius: 30px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    box-shadow: 0 0 25px rgba(224, 42, 144, 0.4);
-    transition: 0.3s;
-}
-
-.graphics-more-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 35px rgba(224, 42, 144, 0.7);
-}
 
 
 /* 📞 CONTACT SECTION */
